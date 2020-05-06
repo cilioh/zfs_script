@@ -37,6 +37,7 @@ throughput=`awk -F 'all jobs'  '{print $2}'  <<< $output | cut -d'(' -f2 | cut -
 
 stripesize=`cat ${sig_dir}/setstripe`
 echo "["${bsize}","${numjobs}","${annot}","${stripesize}",CN"${clientnum}"] "$percentile_95 $percentile_99 $percentile_999 $percentile_9999 $throughput >> $filename
+echo "["${bsize}","${numjobs}","${annot}","${stripesize}",CN"${clientnum}"] "$percentile_95 $percentile_99 $percentile_999 $percentile_9999 $throughput >> /mnt/share/cykim/result/test-total.log
 
 cp $filename /mnt/share/cykim/result/test${clientnum}.log
 

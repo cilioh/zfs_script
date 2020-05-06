@@ -106,6 +106,7 @@ waf3=`cat ${sig_dir}/result-waf3` && rm -rf ${sig_dir}/result-waf3
 
 stripesize=`cat ${sig_dir}/setstripe`
 echo "["${bsize}","${numjobs}","${annot}","${stripesize}",CN7] "$percentile_95 $percentile_99 $percentile_999 $percentile_9999 $throughput $waf1 $waf2 $waf3 >> $filename
+echo "["${bsize}","${numjobs}","${annot}","${stripesize}",CN7] "$percentile_95 $percentile_99 $percentile_999 $percentile_9999 $throughput $waf1 $waf2 $waf3 >> /mnt/share/cykim/result/test_total.log
 
 cp $filename /mnt/share/cykim/result/test7.log
 
