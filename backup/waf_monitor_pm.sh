@@ -17,7 +17,7 @@ do
 	nand_writes_bf_1=`expr $(echo $output | awk '{print $26}' | cut -d'(' -f2 | cut -d')' -f1) + 0`
 
 	# interval
-	sleep 119
+	sleep 59
 
 
 	#nvme command for WAF
@@ -42,7 +42,7 @@ do
 	        WAF_1=$(echo "$nand_writes_bf_1 $user_writes_bf_1 $nand_writes_at_1 $user_writes_at_1" | awk '{printf "%.4f \n", ($3-$1)/($4-$2)}')
 	fi
 
-	echo $WAF_0 $WAF_1
+	echo $WAF_0 $WAF_1 >> /mnt/share/cykim/result/pm_waf${1}.txt
 done
 
 exit 0

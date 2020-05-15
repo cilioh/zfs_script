@@ -17,8 +17,8 @@ echo "OFF" > ${sig_dir}/cn10
 ssh cn8 'kill -9 `pidof sh`' 2> ${sig_dir}/dummy
 ssh cn9 'kill -9 `pidof sh`' 2> ${sig_dir}/dummy
 ssh cn10 'kill -9 `pidof sh`' 2> ${sig_dir}/dummy
-ssh cn8 'sh /root/lustre-compute/nvme-log-mc.sh '${bsize} ${numjobs} ${annot}' 8' &
-ssh cn9 'sh /root/lustre-compute/nvme-log-mc.sh '${bsize} ${numjobs} ${annot}' 9' &
+#ssh cn8 'sh /root/lustre-compute/nvme-log-mc.sh '${bsize} ${numjobs} ${annot}' 8' &
+#ssh cn9 'sh /root/lustre-compute/nvme-log-mc.sh '${bsize} ${numjobs} ${annot}' 9' &
 #ssh cn10 'sh /root/lustre-compute/nvme-log-mc.sh '${bsize} ${numjobs} ${annot}' 10' &
 sleep 1
 
@@ -113,7 +113,7 @@ cp $filename /mnt/share/cykim/result/test7.log
 echo "["${bsize}","${numjobs}","${annot}","${stripesize}",CN7] "$percentile_95 $percentile_99 $percentile_999 $percentile_9999 $throughput $waf1 $waf2 $waf3
 
 # mc
-echo `tail -1 /mnt/share/cykim/result/test8.log`
-echo `tail -1 /mnt/share/cykim/result/test9.log`
+#echo `tail -1 /mnt/share/cykim/result/test8.log`
+#echo `tail -1 /mnt/share/cykim/result/test9.log`
 #echo `tail -1 /mnt/share/cykim/result/test10.log`
 exit 0
