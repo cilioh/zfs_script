@@ -17,8 +17,16 @@ ssh pm1 'sh /mnt/share/cykim/backup/waf_monitor_pm.sh 1' &
 ssh pm2 'sh /mnt/share/cykim/backup/waf_monitor_pm.sh 2' &
 ssh pm3 'sh /mnt/share/cykim/backup/waf_monitor_pm.sh 3' &
 
+echo "" > /mnt/share/cykim/result/pm_waf1.txt
+echo "" > /mnt/share/cykim/result/pm_waf2.txt
+echo "" > /mnt/share/cykim/result/pm_waf3.txt
+
+echo "" > /mnt/share/cykim/result/gc_throughputCN7.txt
+echo "" > /mnt/share/cykim/result/gc_throughputCN8.txt
+echo "" > /mnt/share/cykim/result/gc_throughputCN9.txt
+echo "" > /mnt/share/cykim/result/gc_throughputCN10.txt
 #Loop
-for stripe in 1 2 3 4 5 6
+for stripe in 2 3 4 5 6
 do
 	echo "ON" > ${sig_dir}/breaksig
 	sleep 1
@@ -34,7 +42,7 @@ do
 	#Terminate Timer - 60 minutes
 	#Placeholder on pm_waf#.txt
 	echo "Timer ON"
-	/mnt/share/cykim/backup/60min_timer.sh &
+	/mnt/share/cykim/backup/60min_timer.sh ${stripe} &
 	sleep 1
 
 
@@ -59,11 +67,19 @@ do
 	echo "Stripe Count : "${stripe}" DONE !"
 	echo ""
 	echo "**************"
-	sleep 10
+	sleep 1200
+
+	echo 3 > /proc/sys/vm/drop_caches
+	ssh cn8 'echo 3 > /proc/sys/vm/drop_caches'
+	ssh cn9 'echo 3 > /proc/sys/vm/drop_caches'
+	ssh cn10 'echo 3 > /proc/sys/vm/drop_caches'
+	ssh pm1 'echo 3 > /proc/sys/vm/drop_caches'
+	ssh pm2 'echo 3 > /proc/sys/vm/drop_caches'
+	ssh pm3 'echo 3 > /proc/sys/vm/drop_caches'
 done
 #Loop END
 
 echo "OFF" > ${sig_dir}/termall
 echo "WORKLOAD ALL DONE"
-
+sh /mnt/share/cykim/git-push.sh
 exit 0
