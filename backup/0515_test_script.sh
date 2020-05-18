@@ -81,5 +81,16 @@ done
 
 echo "OFF" > ${sig_dir}/termall
 echo "WORKLOAD ALL DONE"
+
+cat /mnt/share/cykim/result/pm_waf1.txt >> /mnt/share/cykim/result/backup/lustre/pm_waf1.txt
+cat /mnt/share/cykim/result/pm_waf2.txt >> /mnt/share/cykim/result/backup/lustre/pm_waf2.txt
+cat /mnt/share/cykim/result/pm_waf3.txt >> /mnt/share/cykim/result/backup/lustre/pm_waf3.txt
+
+cat /mnt/share/cykim/result/gc_throughputCN7.txt >> /mnt/share/cykim/result/backup/lustre/gc_throughputCN7.txt
+cat /mnt/share/cykim/result/gc_throughputCN8.txt >> /mnt/share/cykim/result/backup/lustre/gc_throughputCN8.txt
+cat /mnt/share/cykim/result/gc_throughputCN9.txt >> /mnt/share/cykim/result/backup/lustre/gc_throughputCN9.txt
+cat /mnt/share/cykim/result/gc_throughputCN10.txt >> /mnt/share/cykim/result/backup/lustre/gc_throughputCN10.txt
+
+
 sh /mnt/share/cykim/git-push.sh
 exit 0
