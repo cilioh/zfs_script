@@ -26,7 +26,7 @@ echo "" > /mnt/share/cykim/result/gc_throughputCN8.txt
 echo "" > /mnt/share/cykim/result/gc_throughputCN9.txt
 echo "" > /mnt/share/cykim/result/gc_throughputCN10.txt
 #Loop
-for stripe in 48
+for stripe in 12 24 48
 do
 	echo "ON" > ${sig_dir}/breaksig
 	sleep 1

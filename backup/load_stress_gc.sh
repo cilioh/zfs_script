@@ -6,7 +6,7 @@ nodename=${3}
 filename=${4}
 stripecount=${5}
 
-directory="/mnt/pm963"
+directory="/mnt/lustre"
 sig_dir="/mnt/share/cykim/signal"
 iternum=1
 
