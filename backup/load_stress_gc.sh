@@ -47,10 +47,10 @@ do
 	sleep 1
 
 	#File Remove
-	if [ $iternum -gt 1 ]; then
-		rmnum=`expr ${iternum} - 1`
-		rm -rf ${directory}/${filename}${rmnum}.*
-	fi
+#	if [ $iternum -gt 1 ]; then
+#		rmnum=`expr ${iternum} - 1`
+#		rm -rf ${directory}/${filename}${rmnum}.*
+#	fi
 
 	#iteration
 	iternum=`expr $iternum + 1`
