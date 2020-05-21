@@ -1,5 +1,6 @@
 #!/bin/bash
 sig_dir="/mnt/share/cykim/signal"
+folder="0520"
 
 echo 3 > /proc/sys/vm/drop_caches
 ssh pm1 'echo 3 > /proc/sys/vm/drop_caches'
@@ -23,6 +24,12 @@ for stripe in 1 6 48
 do
 	for bsize in "64MB" "256MB" "1GB" "4GB"
 	do
+
+	# FILL up the tank
+	fio --directory=/mnt/lustre --name=preset --rw=write --direct=0 --bs=1M --size=5369690464KB --numjobs=1 --group_reporting --fallocate=none
+	sleep 10
+	rm -rf /mnt/lustre/preset*
+	sleep 10
 
 	echo "ON" > ${sig_dir}/breaksig
 	sleep 1
@@ -59,7 +66,7 @@ do
 	echo "Stripe Count : "${stripe}" DONE !"
 	echo ""
 	echo "**************"
-	sleep 1200
+	sleep 60
 
 	echo 3 > /proc/sys/vm/drop_caches
 	ssh pm1 'echo 3 > /proc/sys/vm/drop_caches'
@@ -75,10 +82,10 @@ done
 echo "OFF" > ${sig_dir}/termall
 echo "WORKLOAD ALL DONE"
 
-cat /mnt/share/cykim/result/pm_waf1.txt >> /mnt/share/cykim/result/backup/lustre/pm_waf1.txt
-cat /mnt/share/cykim/result/pm_waf2.txt >> /mnt/share/cykim/result/backup/lustre/pm_waf2.txt
-cat /mnt/share/cykim/result/pm_waf3.txt >> /mnt/share/cykim/result/backup/lustre/pm_waf3.txt
-cat /mnt/share/cykim/result/gc_throughputCN7.txt >> /mnt/share/cykim/result/backup/lustre/gc_throughputCN7.txt
+cat /mnt/share/cykim/result/pm_waf1.txt >> /mnt/share/cykim/result/${folder}/pm_waf1.txt
+cat /mnt/share/cykim/result/pm_waf2.txt >> /mnt/share/cykim/result/${folder}/pm_waf2.txt
+cat /mnt/share/cykim/result/pm_waf3.txt >> /mnt/share/cykim/result/${folder}/pm_waf3.txt
+cat /mnt/share/cykim/result/gc_throughputCN7.txt >> /mnt/share/cykim/result/${folder}/gc_throughputCN7.txt
 #cat /mnt/share/cykim/result/gc_throughputCN8.txt >> /mnt/share/cykim/result/backup/raw/gc_throughputCN8.txt
 #cat /mnt/share/cykim/result/gc_throughputCN9.txt >> /mnt/share/cykim/result/backup/raw/gc_throughputCN9.txt
 #cat /mnt/share/cykim/result/gc_throughputCN10.txt >> /mnt/share/cykim/result/backup/raw/gc_throughputCN10.txt
