@@ -27,8 +27,15 @@ echo "" > /mnt/share/cykim/result/gc_throughputCN8.txt
 echo "" > /mnt/share/cykim/result/gc_throughputCN9.txt
 echo "" > /mnt/share/cykim/result/gc_throughputCN10.txt
 #Loop
-for stripe in 12 24 48
+for stripe in 1 6 48
 do
+	lfs setstripe -c 128 /mnt/lustre
+	sleep 2
+	fio --directory=/mnt/lustre --name=preset --rw=write --direct=0 --bs=1M --size=5369690464KB --numjobs=1 --group_reporting --fallocate=none
+	sleep 10
+	rm -rf /mnt/lustre/preset*
+	sleep 10
+
 	echo "ON" > ${sig_dir}/breaksig
 	sleep 1
 
@@ -68,7 +75,7 @@ do
 	echo "Stripe Count : "${stripe}" DONE !"
 	echo ""
 	echo "**************"
-	sleep 1200
+	sleep 60
 
 	echo 3 > /proc/sys/vm/drop_caches
 	ssh cn8 'echo 3 > /proc/sys/vm/drop_caches'
@@ -77,6 +84,12 @@ do
 	ssh pm1 'echo 3 > /proc/sys/vm/drop_caches'
 	ssh pm2 'echo 3 > /proc/sys/vm/drop_caches'
 	ssh pm3 'echo 3 > /proc/sys/vm/drop_caches'
+
+	rm -rf /mnt/lustre/apple*
+	rm -rf /mnt/lustre/banana*
+	rm -rf /mnt/lustre/citrus*
+	rm -rf /mnt/lustre/dragonfruit*
+	sleep 10
 done
 #Loop END
 
@@ -93,5 +106,5 @@ cat /mnt/share/cykim/result/gc_throughputCN9.txt >> /mnt/share/cykim/result/${fo
 cat /mnt/share/cykim/result/gc_throughputCN10.txt >> /mnt/share/cykim/result/${folder}/gc_throughputCN10.txt
 
 
-sh /mnt/share/cykim/git-push.sh
+#sh /mnt/share/cykim/git-push.sh
 exit 0
