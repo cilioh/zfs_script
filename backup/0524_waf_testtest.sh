@@ -1,12 +1,8 @@
 #!/bin/bash
 sig_dir="/mnt/share/cykim/signal"
-folder="0523_2"
+folder="0524"
 
 echo 3 > /proc/sys/vm/drop_caches
-ssh cn8 'echo 3 > /proc/sys/vm/drop_caches'
-ssh cn9 'echo 3 > /proc/sys/vm/drop_caches'
-ssh cn10 'echo 3 > /proc/sys/vm/drop_caches'
-
 ssh pm1 'echo 3 > /proc/sys/vm/drop_caches'
 ssh pm2 'echo 3 > /proc/sys/vm/drop_caches'
 ssh pm3 'echo 3 > /proc/sys/vm/drop_caches'
@@ -23,17 +19,11 @@ echo "" > /mnt/share/cykim/result/pm_waf1.txt
 echo "" > /mnt/share/cykim/result/pm_waf2.txt
 echo "" > /mnt/share/cykim/result/pm_waf3.txt
 
-echo "" > /mnt/share/cykim/result/gc_throughputCN7.txt
-echo "" > /mnt/share/cykim/result/gc_throughputCN8.txt
-echo "" > /mnt/share/cykim/result/gc_throughputCN9.txt
-echo "" > /mnt/share/cykim/result/gc_throughputCN10.txt
-
 #Loop
-for stripe in 1 6 48
+for stripe in 6
 do
 #	for bsize in "64MB" "256MB" "1GB" "4GB"
 #	do
-	bsize="one"
 
 	# FILL up the tank
 	fio --directory=/mnt/lustre --name=preset --rw=write --direct=0 --bs=1M --size=5369690464KB --numjobs=1 --group_reporting --fallocate=none
@@ -42,10 +32,10 @@ do
 	sleep 10
 	
 	#Fill up 95%
-	for ii in {1..2300}
-	do
-		fio --directory=/mnt/lustre --name=preset${ii} --rw=write --direct=0 --bs=1M --size=128MB --numjobs=16 --group_reporting --fallocate=none > /mnt/share/cykim/signal/dummy
-	done
+#	for ii in {1..2300}
+#	do
+#		fio --directory=/mnt/lustre --name=preset${ii} --rw=write --direct=0 --bs=1M --size=128MB --numjobs=16 --group_reporting --fallocate=none > /mnt/share/cykim/signal/dummy
+#	done
 	
 	echo "ON" > ${sig_dir}/breaksig
 	sleep 1
@@ -56,14 +46,14 @@ do
 	sleep 1
 
 	# vm & io result
-	ssh pm1 '/mnt/share/cykim/backup/vmstat.sh vm1_'${stripe}'_'${bsize} &
-	ssh pm1 '/mnt/share/cykim/backup/iostat.sh io1_'${stripe}'_'${bsize} &
+#	ssh pm1 '/mnt/share/cykim/backup/vmstat.sh vm1_'${stripe}'_'${bsize} &
+#	ssh pm1 '/mnt/share/cykim/backup/iostat.sh io1_'${stripe}'_'${bsize} &
 
-	ssh pm2 '/mnt/share/cykim/backup/vmstat.sh vm2_'${stripe}'_'${bsize} &
-	ssh pm2 '/mnt/share/cykim/backup/iostat.sh io2_'${stripe}'_'${bsize} &
+#	ssh pm2 '/mnt/share/cykim/backup/vmstat.sh vm2_'${stripe}'_'${bsize} &
+#	ssh pm2 '/mnt/share/cykim/backup/iostat.sh io2_'${stripe}'_'${bsize} &
 
-	ssh pm3 '/mnt/share/cykim/backup/vmstat.sh vm3_'${stripe}'_'${bsize} &
-	ssh pm3 '/mnt/share/cykim/backup/iostat.sh io3_'${stripe}'_'${bsize} &
+#	ssh pm3 '/mnt/share/cykim/backup/vmstat.sh vm3_'${stripe}'_'${bsize} &
+#	ssh pm3 '/mnt/share/cykim/backup/iostat.sh io3_'${stripe}'_'${bsize} &
 
 	#Terminate Timer - 60 minutes
 	#Placeholder on pm_waf#.txt
@@ -72,11 +62,11 @@ do
 	sleep 1
 
 	#FIO - Record Throughput & Latency
-	sh /mnt/share/cykim/backup/load_stress_gc.sh 256MB 16 CN8 banana ${stripe} &
-	sh /mnt/share/cykim/backup/load_stress_gc.sh 1G 16 CN9 citrus ${stripe} &
-	sh /mnt/share/cykim/backup/load_stress_gc.sh 4G 16 CN10 dragonfruit ${stripe} &
-	sh /mnt/share/cykim/backup/load_stress_gc.sh 64MB 16 CN7 apple ${stripe} &
-
+#	sh /mnt/share/cykim/backup/load_stress_gc.sh 256MB 16 CN8 banana ${stripe} &
+#	sh /mnt/share/cykim/backup/load_stress_gc.sh 1G 16 CN9 citrus ${stripe} &
+#	sh /mnt/share/cykim/backup/load_stress_gc.sh 4G 16 CN10 dragonfruit ${stripe} &
+	sh /mnt/share/cykim/backup/load_stress_gc.sh 16GB 16 CN7 apple ${stripe} &
+ 
 	#Wait for 60 minutes
 	while true
 	do
@@ -113,10 +103,10 @@ do
 	ssh pm2 'echo 3 > /proc/sys/vm/drop_caches'
 	ssh pm3 'echo 3 > /proc/sys/vm/drop_caches'
 
-#	rm -rf /mnt/lustre/apple*
-#	sleep 10
-#	done
-done
+	rm -rf /mnt/lustre/apple*
+	sleep 10
+	done
+#done
 #Loop END
 
 echo "OFF" > ${sig_dir}/termall
@@ -126,12 +116,9 @@ cat /mnt/share/cykim/result/pm_waf1.txt >> /mnt/share/cykim/result/${folder}/pm_
 cat /mnt/share/cykim/result/pm_waf2.txt >> /mnt/share/cykim/result/${folder}/pm_waf2.txt
 cat /mnt/share/cykim/result/pm_waf3.txt >> /mnt/share/cykim/result/${folder}/pm_waf3.txt
 cat /mnt/share/cykim/result/gc_throughputCN7.txt >> /mnt/share/cykim/result/${folder}/gc_throughputCN7.txt
-cat /mnt/share/cykim/result/gc_throughputCN8.txt >> /mnt/share/cykim/result/${folder}/gc_throughputCN8.txt
-cat /mnt/share/cykim/result/gc_throughputCN9.txt >> /mnt/share/cykim/result/${folder}/gc_throughputCN9.txt
-cat /mnt/share/cykim/result/gc_throughputCN10.txt >> /mnt/share/cykim/result/${folder}/gc_throughputCN10.txt
-
-mv /mnt/share/cykim/result/io* /mnt/share/cykim/result/${folder}/
-mv /mnt/share/cykim/result/vm* /mnt/share/cykim/result/${folder}/
+#cat /mnt/share/cykim/result/gc_throughputCN8.txt >> /mnt/share/cykim/result/backup/raw/gc_throughputCN8.txt
+#cat /mnt/share/cykim/result/gc_throughputCN9.txt >> /mnt/share/cykim/result/backup/raw/gc_throughputCN9.txt
+#cat /mnt/share/cykim/result/gc_throughputCN10.txt >> /mnt/share/cykim/result/backup/raw/gc_throughputCN10.txt
 
 #sh /mnt/share/cykim/git-push.sh
 exit 0

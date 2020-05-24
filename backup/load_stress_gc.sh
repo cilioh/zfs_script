@@ -49,7 +49,17 @@ do
 	#File Remove
 	if [ $iternum -gt 1 ]; then
 		rmnum=`expr ${iternum} - 1`
-		rm -rf ${directory}/${filename}${rmnum}.*
+		rm -rf ${directory}/${filename}${rmnum}.1*
+		rm -rf ${directory}/${filename}${rmnum}.2*
+		rm -rf ${directory}/${filename}${rmnum}.3*
+		rm -rf ${directory}/${filename}${rmnum}.4*
+	fi
+	totval=`lfs df -h | awk '$1=="filesystem_summary:" { print $5 }' | grep -oP '\d+'`
+#	totval=`expr $totval + 0`
+
+	echo " 98 % storage full - EMPTY "
+	if [ $totval -ge 98 ]; then
+		rm -rf ${directory}/${filename}*
 	fi
 
 	#iteration
