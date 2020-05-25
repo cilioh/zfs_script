@@ -57,8 +57,9 @@ do
 	totval=`lfs df -h | awk '$1=="filesystem_summary:" { print $5 }' | grep -oP '\d+'`
 #	totval=`expr $totval + 0`
 
-	echo " 98 % storage full - EMPTY "
 	if [ $totval -ge 98 ]; then
+
+		echo " 98 % storage full - EMPTY "
 		rm -rf ${directory}/${filename}*
 	fi
 
