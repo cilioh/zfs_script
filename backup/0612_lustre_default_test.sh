@@ -6,26 +6,30 @@ nodename="CN7"
 filename="apple"
 todaydate=`date "+%m%d"`
 todaytime=`date "+%H%M"`
+SECONDS=0
 
 mkdir -p /mnt/share/cykim/result/${todaydate}
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_${nodename}.txt
 
-#for bsize in "4G" "8G" "16G" "32G"
-for bsize in "4G"
+#for bsize in "4G"
+for bsize in "4G" "8G" "16G" "32G"
 do
-	for numjobs in "4"
-#	for numjobs in "1" "2" "4" "8" "16"
+#	for numjobs in "4"
+	for numjobs in "1" "2" "4" "8" "16"
 	do
-		for stripecount in "8"
-#		for stripecount in "1" "2" "4" "8" "16"
+#		for stripecount in "8"
+		for stripecount in "1" "2" "4" "8" "12" "24"
 		do
 			lfs setstripe -c ${stripecount} /mnt/lustre
 
-			for iter in {1..2}
-#			for iter in {1..5}
+#			for iter in {1..2}
+			for iter in {1..5}
 			do
 				rm -rf /mnt/lustre/*
 				sleep 2
+
+				echo 3 > /proc/sys/vm/drop_caches
+				sleep 1
 
 				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter}
 
@@ -40,6 +44,7 @@ do
 	done
 done
 
-echo "script - DONE"
+duration=$SECONDS
+echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed. SCRIPT DONE"
 
 exit 0
