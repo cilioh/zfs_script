@@ -35,12 +35,22 @@ if [[ $1 == "oss1" ]]; then
 	sleep 2
 	mkfs.lustre --ost --backfstype=zfs --index=2 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost1/ost1 /dev/nvme1n1
 	sleep 2
+	mkfs.lustre --ost --backfstype=zfs --index=3 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost2/ost2 /dev/nvme2n1
+	sleep 2
+	mkfs.lustre --ost --backfstype=zfs --index=4 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost3/ost3 /dev/nvme3n1
+	sleep 2
 
 	mount -t lustre ost0/ost0 /lustre/ost0
 	mount -t lustre ost0/ost0 /lustre/ost0
 	sleep 2
 	mount -t lustre ost1/ost1 /lustre/ost1
 	mount -t lustre ost1/ost1 /lustre/ost1
+	sleep 2
+	mount -t lustre ost2/ost2 /lustre/ost2
+	mount -t lustre ost2/ost2 /lustre/ost2
+	sleep 2
+	mount -t lustre ost3/ost3 /lustre/ost3
+	mount -t lustre ost3/ost3 /lustre/ost3
 	sleep 2
 	zfs list
 	df -h
@@ -48,16 +58,25 @@ fi
 
 if [[ $1 == "oss2" ]]; then
 
-	mkfs.lustre --ost --backfstype=zfs --index=3 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost2/ost2 /dev/nvme0n1
+	mkfs.lustre --ost --backfstype=zfs --index=5 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost4/ost4 /dev/nvme0n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=zfs --index=4 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost3/ost3 /dev/nvme1n1
+	mkfs.lustre --ost --backfstype=zfs --index=6 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost5/ost5 /dev/nvme1n1
 	sleep 2
-
-	mount -t lustre ost2/ost2 /lustre/ost2
-	mount -t lustre ost2/ost2 /lustre/ost2
+	mkfs.lustre --ost --backfstype=zfs --index=7 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost6/ost6 /dev/nvme2n1
 	sleep 2
-	mount -t lustre ost3/ost3 /lustre/ost3
-	mount -t lustre ost3/ost3 /lustre/ost3
+	mkfs.lustre --ost --backfstype=zfs --index=8 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost7/ost7 /dev/nvme3n1
+	sleep 2
+	mount -t lustre ost4/ost4 /lustre/ost4
+	mount -t lustre ost4/ost4 /lustre/ost4
+	sleep 2
+	mount -t lustre ost5/ost5 /lustre/ost5
+	mount -t lustre ost5/ost5 /lustre/ost5
+	sleep 2
+	mount -t lustre ost6/ost6 /lustre/ost6
+	mount -t lustre ost6/ost6 /lustre/ost6
+	sleep 2
+	mount -t lustre ost7/ost7 /lustre/ost7
+	mount -t lustre ost7/ost7 /lustre/ost7
 	sleep 2
 	zfs list
 	df -h
@@ -66,16 +85,26 @@ fi
 
 if [[ $1 == "oss3" ]]; then
 
-	mkfs.lustre --ost --backfstype=zfs --index=5 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost4/ost4 /dev/nvme0n1
+	mkfs.lustre --ost --backfstype=zfs --index=9 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost8/ost8 /dev/nvme0n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=zfs --index=6 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost5/ost5 /dev/nvme1n1
+	mkfs.lustre --ost --backfstype=zfs --index=10 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost9/ost9 /dev/nvme1n1
+	sleep 2
+	mkfs.lustre --ost --backfstype=zfs --index=11 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost10/ost10 /dev/nvme2n1
+	sleep 2
+	mkfs.lustre --ost --backfstype=zfs --index=12 --reformat --mgsnode=mds2i@o2ib --fsname=lustre ost11/ost11 /dev/nvme3n1
 	sleep 2
 
-	mount -t lustre ost4/ost4 /lustre/ost4
-	mount -t lustre ost4/ost4 /lustre/ost4
+	mount -t lustre ost8/ost8 /lustre/ost8
+	mount -t lustre ost8/ost8 /lustre/ost8
 	sleep 2
-	mount -t lustre ost5/ost5 /lustre/ost5
-	mount -t lustre ost5/ost5 /lustre/ost5
+	mount -t lustre ost9/ost9 /lustre/ost9
+	mount -t lustre ost9/ost9 /lustre/ost9
+	sleep 2
+	mount -t lustre ost10/ost10 /lustre/ost10
+	mount -t lustre ost10/ost10 /lustre/ost10
+	sleep 2
+	mount -t lustre ost11/ost11 /lustre/ost11
+	mount -t lustre ost11/ost11 /lustre/ost11
 	sleep 2
 	zfs list
 	df -h

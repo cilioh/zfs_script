@@ -30,9 +30,16 @@ if [[ ${1} == "oss" ]]; then
 		ssh $oss 'umount /lustre/ost'${ostnum}
                 ssh $oss 'zpool destroy ost'${ostnum}
                 ostnum=`expr $ostnum + 1`
+		ssh $oss 'umount /lustre/ost'${ostnum}
+                ssh $oss 'zpool destroy ost'${ostnum}
+                ostnum=`expr $ostnum + 1`
+		ssh $oss 'umount /lustre/ost'${ostnum}
+                ssh $oss 'zpool destroy ost'${ostnum}
+                ostnum=`expr $ostnum + 1`
                 ssh $oss 'modprobe -r lustre'
 		ssh $oss 'lctl network down'
                 ssh $oss 'lustre_rmmod'
+		ssh $oss 'systemctl kill zfs-zed'
 		ssh $oss 'modprobe -r zfs'
                 ssh $oss 'modprobe -r lnet'
                 echo "${oss} - lustreFS DOWN"
@@ -41,11 +48,13 @@ fi
 
 if [[ ${1} == "mdt" ]]; then
 
-	ssh 192.168.0.204 'umount /lustre/mdt'
+	mdtip="192.168.0.204"
+	ssh $mdtip 'umount /lustre/mdt'
 	ssh 192.168.0.204 'zpool destroy mdt'
 	ssh 192.168.0.204 'modprobe -r lustre'
 	ssh 192.168.0.204 'lctl network down'
 	ssh 192.168.0.204 'lustre_rmmod'
+	ssh 192.168.0.204 'systemctl kill zfs-zed'
 	ssh 192.168.0.204 'modprobe -r zfs'
 	ssh 192.168.0.204 'modprobe -r lnet'
 	echo "MDT - lustreFS DOWN"
