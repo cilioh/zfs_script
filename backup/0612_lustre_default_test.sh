@@ -22,7 +22,7 @@ do
 		for stripecount in "1" "2" "4" "8" "12" "24"
 		do
 			lfs setstripe -c ${stripecount} /mnt/lustre
-
+			ssh cn9 "lfs setstripe -c "${stripecount}" /mnt/lustre"
 #			for iter in {1..2}
 			for iter in {1..5}
 			do
@@ -33,16 +33,16 @@ do
 				ssh cn9 'echo 3 > /proc/sys/vm/drop_caches'
 				sleep 1
 
-				echo "OFF" > ${sig_dir}/cn8
-				echo "OFF" > ${sig_dir}/cn9
+				echo "OFF" > ${sig_dir}/CN8
+				echo "OFF" > ${sig_dir}/CN9
 
-				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} CN8 apple ${stripecount} ${todaydate} ${todaytime} ${iter} &
-				ssh cn9 '/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} CN9 banana ${stripecount} ${todaydate} ${todaytime} ${iter}'
+				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} "CN8" "apple" ${stripecount} ${todaydate} ${todaytime} ${iter} &
+				ssh cn9 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN9" "banana" ${stripecount} ${todaydate} ${todaytime} ${iter}
 
 				while true
 				do
 					#count=0
-					msg=`cat ${sig_dir}/cn8`
+					msg=`cat ${sig_dir}/CN8`
 					if [[ $msg == "ON" ]]; then
 						break	
 					#	msg2=`cat ${sig_dir}/cn9`
