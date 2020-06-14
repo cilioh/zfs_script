@@ -28,4 +28,5 @@ sig_dir="/mnt/share/cykim/signal"
 	echo "["${nodename}",BJ="${bsize}",NJ="${numjobs}",SC="${stripecount}",IT-"${iternum}"],99%=["${per99}"],99.99%=["${per9999}"],iops_avg=["${iopsavg}"],TH=["${th}"]"
 	sleep 1
 
+	echo "ON" > /mnt/share/cykim/signal/${nodename}
 exit 0

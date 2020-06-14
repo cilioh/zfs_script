@@ -9,7 +9,8 @@ todaytime=`date "+%H%M"`
 SECONDS=0
 
 mkdir -p /mnt/share/cykim/result/${todaydate}
-echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_${nodename}.txt
+echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN8.txt
+echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN9.txt
 
 #for bsize in "4G"
 for bsize in "4G" "8G" "16G" "32G"
@@ -29,9 +30,28 @@ do
 				sleep 2
 
 				echo 3 > /proc/sys/vm/drop_caches
+				ssh cn9 'echo 3 > /proc/sys/vm/drop_caches'
 				sleep 1
 
-				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter}
+				echo "OFF" > ${sig_dir}/cn8
+				echo "OFF" > ${sig_dir}/cn9
+
+				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} CN8 apple ${stripecount} ${todaydate} ${todaytime} ${iter} &
+				ssh cn9 '/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} CN9 banana ${stripecount} ${todaydate} ${todaytime} ${iter}'
+
+				while true
+				do
+					#count=0
+					msg=`cat ${sig_dir}/cn8`
+					if [[ $msg == "ON" ]]; then
+						break	
+					#	msg2=`cat ${sig_dir}/cn9`
+					#	if [[ $msg2 == "ON" ]]; then
+					#		count=1
+					#	fi
+					fi
+					sleep 5
+				done
 
 				totval=`lfs df -h | awk '$1=="filesystem_summary:" { print $5 }' | grep -oP '\d+'`
 				if [ $totval -ge 98 ]; then
