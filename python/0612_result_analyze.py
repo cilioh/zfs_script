@@ -1,7 +1,8 @@
 import numpy as np
 import pandas as pd
 
-filename = "1cli_3oss_12ost_CN8"
+foldername = "0615"
+filename = "1cli_1oss_1ost_CN8"
 
 columns = ['nodename', 'bsize', 'numjobs','stripecount','95per','99per','99.9per','99.99per','min_iops','max_iops','avg_iops','throughput']
 dat_s = [0,0,0,0,0,0,0.0,0.0] #data storage
@@ -9,7 +10,7 @@ linecount = 0 #linecount
 
 data_df = pd.DataFrame(columns=columns)
 
-f = open(filename+".txt", 'r')
+f = open("/mnt/share/cykim/result/"+foldername+"/"+filename+".txt", 'r')
 lines = f.readlines()
 for line in lines:
     if (line.find(",") == -1):
@@ -28,17 +29,17 @@ for line in lines:
             dat_s[6] += float(line.split(",")[11])
             dat_s[7] += float(line.split(",")[12])
             
-        #pd에기록
+        #record data into pd
         temp_df = pd.DataFrame(data=[[line.split(",")[0],line.split(",")[1], \
                                      line.split(",")[2],line.split(",")[3], \
-                                     round(dat_s[0]/linecount,2), \
-                                     round(dat_s[1]/linecount,2), \
-                                     round(dat_s[2]/linecount,2), \
-                                     round(dat_s[3]/linecount,2), \
-                                     round(dat_s[4]/linecount,2), \
-                                     round(dat_s[5]/linecount,2), \
-                                     round(dat_s[6]/linecount,2), \
-                                     round(dat_s[7]/linecount,2)  \
+                                     round(dat_s[0]/linecount,2) if linecount != 0 else 0, \
+                                     round(dat_s[1]/linecount,2) if linecount != 0 else 0, \
+                                     round(dat_s[2]/linecount,2) if linecount != 0 else 0, \
+                                     round(dat_s[3]/linecount,2) if linecount != 0 else 0, \
+                                     round(dat_s[4]/linecount,2) if linecount != 0 else 0, \
+                                     round(dat_s[5]/linecount,2) if linecount != 0 else 0, \
+                                     round(dat_s[6]/linecount,2) if linecount != 0 else 0, \
+                                     round(dat_s[7]/linecount,2) if linecount != 0 else 0 \
                                      ]], columns=columns)
         data_df = data_df.append(temp_df)
         data_df = data_df.reset_index(drop=True)
@@ -63,4 +64,4 @@ for line in lines:
 f.close()
 
 #----------------------------
-r = data_df.to_csv(filename+".csv", mode='w')
+r = data_df.to_csv("/mnt/share/cykim/result/"+foldername+"/"+filename+".csv", mode='w')
