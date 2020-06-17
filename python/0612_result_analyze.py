@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 
-foldername = "0615"
-filename = "1cli_1oss_1ost_CN8"
+foldername = "0616"
+filename = "Result_1556_CN10"
 
 columns = ['nodename', 'bsize', 'numjobs','stripecount','95per','99per','99.9per','99.99per','min_iops','max_iops','avg_iops','throughput']
 dat_s = [0,0,0,0,0,0,0.0,0.0] #data storage
