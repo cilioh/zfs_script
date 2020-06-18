@@ -46,6 +46,11 @@ do
 				echo "OFF" > ${sig_dir}/CN9
 				echo "OFF" > ${sig_dir}/CN10
 
+				#iostat initiate
+				ssh pm1 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output1' &
+				ssh pm2 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output2' &
+				ssh pm3 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output3' &
+
 				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} "CN8" "apple" ${stripecount} ${todaydate} ${todaytime} ${iter} &
 				ssh cn9 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN9" "banana" ${stripecount} ${todaydate} ${todaytime} ${iter} &
 				ssh cn10 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN10" "cactus" ${stripecount} ${todaydate} ${todaytime} ${iter}
@@ -61,8 +66,11 @@ do
 							break
 						fi
 					fi
-					sleep 5
+					sleep 1
 				done
+				/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN8"
+				/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN9"
+				/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN10"
 
 				totval=`lfs df -h | awk '$1=="filesystem_summary:" { print $5 }' | grep -oP '\d+'`
 				if [ $totval -ge 98 ]; then

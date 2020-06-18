@@ -23,7 +23,9 @@ sig_dir="/mnt/share/cykim/signal"
 	pm3result=`python iostat_oss.py /mnt/share/cykim/result/output3`
 
 	#Result - ECHO
-	echo ${nodename}","${bsize}","${numjobs}","${stripecount}","${iternum}","${output}","${pm1result}","${pm2result}","${pm3result} >> /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_${nodename}.txt
+	echo ${nodename}","${bsize}","${numjobs}","${stripecount}","${iternum}","${output} > /mnt/share/cykim/result/${nodename}.txt
+
+	#/mnt/share/cykim/result/${todaydate}/Result_${todaytime}_${nodename}.txt
 	
 	per95=`echo $output | cut -d',' -f1`
 	per99=`echo $output | cut -d',' -f2`

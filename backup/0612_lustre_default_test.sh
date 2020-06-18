@@ -2,7 +2,7 @@
 
 directory="/mnt/lustre"
 sig_dir="/mnt/share/cykim/signal"
-nodename="CN7"
+nodename="CN8"
 filename="apple"
 todaydate=`date "+%m%d"`
 todaytime=`date "+%H%M"`
@@ -11,10 +11,10 @@ SECONDS=0
 mkdir -p /mnt/share/cykim/result/${todaydate}
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN8.txt
 
-for bsize in "4G"
+for bsize in "16G"
 #for bsize in "4G" "8G" "16G" "32G"
 do
-	for numjobs in "2"
+	for numjobs in "4"
 #	for numjobs in "1" "2" "4" "8"
 	do
 		for stripecount in "12"
@@ -36,8 +36,9 @@ do
 				ssh pm2 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output2' &
 				ssh pm3 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output3' &
 
-				#fio_script: kill iostat and parse iostat results too
 				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter}
+
+				/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} ${nodename}
 
 				totval=`lfs df -h | awk '$1=="filesystem_summary:" { print $5 }' | grep -oP '\d+'`
 				if [ $totval -ge 98 ]; then
