@@ -11,18 +11,18 @@ SECONDS=0
 mkdir -p /mnt/share/cykim/result/${todaydate}
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN8.txt
 
-#for bsize in "32G"
-for bsize in "4G" "8G" "16G" "32G"
+for bsize in "4G"
+#for bsize in "4G" "8G" "16G" "32G"
 do
-#	for numjobs in "16"
-	for numjobs in "1" "2" "4" "8"
+	for numjobs in "2"
+#	for numjobs in "1" "2" "4" "8"
 	do
-#		for stripecount in "2"
-		for stripecount in "1" "2" "4" "8" "12" "24"
+		for stripecount in "12"
+#		for stripecount in "1" "2" "4" "8" "12" "24"
 		do
 			lfs setstripe -c ${stripecount} /mnt/lustre
-#			for iter in {1..2}
-			for iter in {1..5}
+			for iter in {1..2}
+#			for iter in {1..5}
 			do
 				rm -rf /mnt/lustre/*
 				sleep 5
@@ -31,6 +31,12 @@ do
 				ssh pm1 'echo 3 > /proc/sys/vm/drop_caches'
 				sleep 1
 
+				#iostat initiate
+				ssh pm1 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output1' &
+				ssh pm2 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output2' &
+				ssh pm3 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output3' &
+
+				#fio_script: kill iostat and parse iostat results too
 				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter}
 
 				totval=`lfs df -h | awk '$1=="filesystem_summary:" { print $5 }' | grep -oP '\d+'`
