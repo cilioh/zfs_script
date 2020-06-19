@@ -14,12 +14,12 @@ echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_$
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN10.txt
 
 #for bsize in "32G"
-for bsize in "16G" "32G" "64G" "128G"
+#for bsize in "16G" "32G" "64G" "128G"
+for bsize in "4G" "8G" "16G" "32G"
 do
-	joblist="1 2 4 8"
+	joblist="1 2 4 8 16"
 	case $bsize in
-		"64G") joblist="1 2 4";;
-		"128G") joblist="1 2";;
+		"32G") joblist="1 2 4 8";;
 	esac
 #	for numjobs in "16"
 	for numjobs in $joblist
