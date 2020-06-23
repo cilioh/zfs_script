@@ -54,7 +54,7 @@ do
 				#iostat initiate
 				ssh pm1 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output1' &
 				ssh pm2 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output2' &
-#				ssh pm3 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output3' &
+				ssh pm3 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output3' &
 
 				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} "CN7" "apple" ${stripecount} ${todaydate} ${todaytime} ${iter} &
 				ssh cn8 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN8" "dfruit" ${stripecount} ${todaydate} ${todaytime} ${iter} &

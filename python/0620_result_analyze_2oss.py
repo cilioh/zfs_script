@@ -10,6 +10,13 @@ columns = ['nodename', 'bsize', 'numjobs','stripecount','95per','99per','99.9per
 'pm1_nvme0_write','pm1_nvme1_write','pm1_nvme2_write','pm1_nvme3_write', \
 'pm2_nvme0_io','pm2_nvme1_io','pm2_nvme2_io','pm2_nvme3_io', \
 'pm2_nvme0_write','pm2_nvme1_write','pm2_nvme2_write','pm2_nvme3_write']
+
+re_columns = ['nodename', 'bsize', 'numjobs','stripecount','95per','99per','99.9per','99.99per','min_iops','max_iops','avg_iops','throughput', \
+'pm1_nvme0_io','pm1_nvme1_io','pm1_nvme2_io','pm1_nvme3_io', \
+'pm2_nvme0_io','pm2_nvme1_io','pm2_nvme2_io','pm2_nvme3_io', \
+'pm1_nvme0_write','pm1_nvme1_write','pm1_nvme2_write','pm1_nvme3_write', \
+'pm2_nvme0_write','pm2_nvme1_write','pm2_nvme2_write','pm2_nvme3_write']
+
 dat_s = [0,0,0,0,0,0,0.0,0.0, \
 0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0, \
 0.0,0.0,0.0,0.0] #data storage
@@ -129,4 +136,4 @@ for line in lines:
 f.close()
 
 #----------------------------
-r = data_df.to_csv("/mnt/share/cykim/result/"+foldername+"/"+filename+".csv", mode='w')
+r = data_df.reindex(columns=re_columns).to_csv("/mnt/share/cykim/result/"+foldername+"/"+filename+".csv", mode='w')
