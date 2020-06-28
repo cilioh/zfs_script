@@ -37,7 +37,7 @@ do
 #				ssh pm3 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output3' &
 
 				echo "Block Size:"${bsize}" NumJobs:"${numjobs}" iter-"${iter}
-				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter}
+				/mnt/share/cykim/backup/fio_script_direct.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter}
 
 				/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} ${nodename}
 
