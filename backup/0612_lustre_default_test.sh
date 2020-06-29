@@ -2,14 +2,14 @@
 
 directory="/mnt/lustre"
 sig_dir="/mnt/share/cykim/signal"
-nodename="PM1"
+nodename="CN7"
 filename="apple"
 todaydate=`date "+%m%d"`
 todaytime=`date "+%H%M"`
 SECONDS=0
 
 mkdir -p /mnt/share/cykim/result/${todaydate}
-echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_PM1.txt
+echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN7.txt
 
 #for bsize in "16G"
 for bsize in "4G" "8G" "16G" "32G"
@@ -18,7 +18,7 @@ do
 	for numjobs in "1" "2" "4" "8" "16"
 	do
 #		for stripecount in "12"
-		for stripecount in "1" "2" "4" "8" "16" "32" "64"
+		for stripecount in "1" "2" "4" "8" "16"
 		do
 			lfs setstripe -C ${stripecount} /mnt/lustre
 #			for iter in {1..2}

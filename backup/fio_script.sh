@@ -9,7 +9,7 @@ todaydate=${6}
 todaytime=${7}
 iternum=${8}
 
-directory="/mnt/local"
+directory="/mnt/lustre"
 sig_dir="/mnt/share/cykim/signal"
 direct=0  #0: buffered , 1:directIO
 
