@@ -12,10 +12,10 @@ mkdir -p /mnt/share/cykim/result/${todaydate}
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN7.txt
 
 #for bsize in "16G"
-for bsize in "4G" "8G"
+for bsize in "4G" "8G" "16G" "32G" "64G" "128G"
 do
 #	for numjobs in "4"
-	for numjobs in "1" "2" "4" "8" "16"
+	for numjobs in "1"
 	do
 #		for stripecount in "12"
 		for stripecount in "1" "2" "4" "8" "16" "32" "64"
