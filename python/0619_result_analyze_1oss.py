@@ -104,4 +104,6 @@ for line in lines:
 f.close()
 
 #----------------------------
+#if using only a few osts
+#data_df = data_df.drop(["pm1_nvme1_io","pm1_nvme2_io","pm1_nvme3_io","pm1_nvme1_write","pm1_nvme2_write","pm1_nvme3_write"],axis=1)
 r = data_df.to_csv("/mnt/share/cykim/result/"+foldername+"/"+filename+".csv", mode='w')
