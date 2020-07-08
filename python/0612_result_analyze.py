@@ -35,8 +35,84 @@ for line in lines:
         continue
     elif (line.split(",")[4] == "5"):
 #        if (line.endswith(",\n")):
-        if (line.find(",,") != -1):
+        if (line.find(",,,,") != -1):
             linecount += 0
+        elif (line.find(",,,") != -1):
+            if(len(line.split(",")) < 37):
+		continue
+            linecount += 1
+            dat_s[0] += int(line.split(",")[5])
+            dat_s[1] += int(line.split(",")[6])
+            dat_s[2] += int(line.split(",")[7])
+            dat_s[3] += int(line.split(",")[8])
+#            dat_s[4] += int(line.split(",")[9])
+            dat_s[7] += int(line.split(",")[10])
+#            dat_s[6] += float(line.split(",")[11])
+#            dat_s[7] += float(line.split(",")[12])
+
+            dat_s[8] += float(line.split(",")[13])
+            dat_s[9] += float(line.split(",")[14])
+            dat_s[10] += float(line.split(",")[15])
+            dat_s[11] += float(line.split(",")[16])
+            dat_s[12] += float(line.split(",")[17])
+            dat_s[13] += float(line.split(",")[18])
+            dat_s[14] += float(line.split(",")[19])
+            dat_s[15] += float(line.split(",")[20])
+            dat_s[16] += float(line.split(",")[21])
+            dat_s[17] += float(line.split(",")[22])
+            dat_s[18] += float(line.split(",")[23])
+            dat_s[19] += float(line.split(",")[24])
+
+            dat_s[20] += float(line.split(",")[25])
+            dat_s[21] += float(line.split(",")[26])
+            dat_s[22] += float(line.split(",")[27])
+            dat_s[23] += float(line.split(",")[28])
+            dat_s[24] += float(line.split(",")[29])
+            dat_s[25] += float(line.split(",")[30])
+            dat_s[26] += float(line.split(",")[31])
+            dat_s[27] += float(line.split(",")[32])
+            dat_s[28] += float(line.split(",")[33])
+            dat_s[29] += float(line.split(",")[34])
+            dat_s[30] += float(line.split(",")[35])
+            dat_s[31] += float(line.split(",")[36])
+        elif (line.find(",,") != -1):
+            if(len(line.split(",")) < 37):
+		continue
+            linecount += 1
+            dat_s[0] += int(line.split(",")[5])
+            dat_s[1] += int(line.split(",")[6])
+            dat_s[2] += int(line.split(",")[7])
+            dat_s[3] += int(line.split(",")[8])
+#            dat_s[4] += int(line.split(",")[9])
+#            dat_s[5] += int(line.split(",")[10])
+            dat_s[7] += float(line.split(",")[11])
+#            dat_s[7] += float(line.split(",")[12])
+
+            dat_s[8] += float(line.split(",")[13])
+            dat_s[9] += float(line.split(",")[14])
+            dat_s[10] += float(line.split(",")[15])
+            dat_s[11] += float(line.split(",")[16])
+            dat_s[12] += float(line.split(",")[17])
+            dat_s[13] += float(line.split(",")[18])
+            dat_s[14] += float(line.split(",")[19])
+            dat_s[15] += float(line.split(",")[20])
+            dat_s[16] += float(line.split(",")[21])
+            dat_s[17] += float(line.split(",")[22])
+            dat_s[18] += float(line.split(",")[23])
+            dat_s[19] += float(line.split(",")[24])
+
+            dat_s[20] += float(line.split(",")[25])
+            dat_s[21] += float(line.split(",")[26])
+            dat_s[22] += float(line.split(",")[27])
+            dat_s[23] += float(line.split(",")[28])
+            dat_s[24] += float(line.split(",")[29])
+            dat_s[25] += float(line.split(",")[30])
+            dat_s[26] += float(line.split(",")[31])
+            dat_s[27] += float(line.split(",")[32])
+            dat_s[28] += float(line.split(",")[33])
+            dat_s[29] += float(line.split(",")[34])
+            dat_s[30] += float(line.split(",")[35])
+            dat_s[31] += float(line.split(",")[36])
         else:
             if(len(line.split(",")) < 37):
 		continue
@@ -121,8 +197,84 @@ for line in lines:
         linecount = 0
     else:
 #        if (line.endswith(",\n")):
-        if (line.find(",,") != -1):
+        if (line.find(",,,,") != -1):
             linecount += 0
+        elif (line.find(",,,") != -1):
+            if(len(line.split(",")) < 37):
+		continue
+            linecount += 1
+            dat_s[0] += int(line.split(",")[5])
+            dat_s[1] += int(line.split(",")[6])
+            dat_s[2] += int(line.split(",")[7])
+            dat_s[3] += int(line.split(",")[8])
+#            dat_s[4] += int(line.split(",")[9])
+            dat_s[7] += int(line.split(",")[10])
+#            dat_s[6] += float(line.split(",")[11])
+#            dat_s[7] += float(line.split(",")[12])
+
+            dat_s[8] += float(line.split(",")[13])
+            dat_s[9] += float(line.split(",")[14])
+            dat_s[10] += float(line.split(",")[15])
+            dat_s[11] += float(line.split(",")[16])
+            dat_s[12] += float(line.split(",")[17])
+            dat_s[13] += float(line.split(",")[18])
+            dat_s[14] += float(line.split(",")[19])
+            dat_s[15] += float(line.split(",")[20])
+            dat_s[16] += float(line.split(",")[21])
+            dat_s[17] += float(line.split(",")[22])
+            dat_s[18] += float(line.split(",")[23])
+            dat_s[19] += float(line.split(",")[24])
+
+            dat_s[20] += float(line.split(",")[25])
+            dat_s[21] += float(line.split(",")[26])
+            dat_s[22] += float(line.split(",")[27])
+            dat_s[23] += float(line.split(",")[28])
+            dat_s[24] += float(line.split(",")[29])
+            dat_s[25] += float(line.split(",")[30])
+            dat_s[26] += float(line.split(",")[31])
+            dat_s[27] += float(line.split(",")[32])
+            dat_s[28] += float(line.split(",")[33])
+            dat_s[29] += float(line.split(",")[34])
+            dat_s[30] += float(line.split(",")[35])
+            dat_s[31] += float(line.split(",")[36])
+        elif (line.find(",,") != -1):
+            if(len(line.split(",")) < 37):
+		continue
+            linecount += 1
+            dat_s[0] += int(line.split(",")[5])
+            dat_s[1] += int(line.split(",")[6])
+            dat_s[2] += int(line.split(",")[7])
+            dat_s[3] += int(line.split(",")[8])
+#            dat_s[4] += int(line.split(",")[9])
+#            dat_s[5] += int(line.split(",")[10])
+            dat_s[7] += float(line.split(",")[11])
+#            dat_s[7] += float(line.split(",")[12])
+
+            dat_s[8] += float(line.split(",")[13])
+            dat_s[9] += float(line.split(",")[14])
+            dat_s[10] += float(line.split(",")[15])
+            dat_s[11] += float(line.split(",")[16])
+            dat_s[12] += float(line.split(",")[17])
+            dat_s[13] += float(line.split(",")[18])
+            dat_s[14] += float(line.split(",")[19])
+            dat_s[15] += float(line.split(",")[20])
+            dat_s[16] += float(line.split(",")[21])
+            dat_s[17] += float(line.split(",")[22])
+            dat_s[18] += float(line.split(",")[23])
+            dat_s[19] += float(line.split(",")[24])
+
+            dat_s[20] += float(line.split(",")[25])
+            dat_s[21] += float(line.split(",")[26])
+            dat_s[22] += float(line.split(",")[27])
+            dat_s[23] += float(line.split(",")[28])
+            dat_s[24] += float(line.split(",")[29])
+            dat_s[25] += float(line.split(",")[30])
+            dat_s[26] += float(line.split(",")[31])
+            dat_s[27] += float(line.split(",")[32])
+            dat_s[28] += float(line.split(",")[33])
+            dat_s[29] += float(line.split(",")[34])
+            dat_s[30] += float(line.split(",")[35])
+            dat_s[31] += float(line.split(",")[36])
         else:
             if(len(line.split(",")) < 37):
 		continue
