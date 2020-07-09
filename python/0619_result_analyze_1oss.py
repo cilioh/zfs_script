@@ -24,21 +24,21 @@ lines = f.readlines()
 for line in lines:
     if (line.find(",") == -1):
         continue
-    elif (line.split(",")[4] == "5"):
+    elif (line.split(",")[4] == "3"):
         if (line.find(",,,,") != -1):
             linecount += 0
         elif (line.find(",,,") != -1):
             if(len(line.split(",")) < 21):
-		continue
+                continue
             linecount += 1
             dat_s[0] += int(line.split(",")[5])
             dat_s[1] += int(line.split(",")[6])
             dat_s[2] += int(line.split(",")[7])
             dat_s[3] += int(line.split(",")[8])
-#            dat_s[4] += int(line.split(",")[9])
+            #dat_s[4] += int(line.split(",")[9])
             dat_s[7] += int(line.split(",")[10])   #throughput
-#            dat_s[6] += float(line.split(",")[11])
-#            dat_s[7] += float(line.split(",")[12])
+            #dat_s[6] += float(line.split(",")[11])
+            #dat_s[7] += float(line.split(",")[12])
 
             dat_s[8] += float(line.split(",")[13])
             dat_s[9] += float(line.split(",")[14])
@@ -51,16 +51,16 @@ for line in lines:
 
         elif (line.find(",,") != -1):
             if(len(line.split(",")) < 21):
-		continue
+                continue
             linecount += 1
             dat_s[0] += int(line.split(",")[5])
             dat_s[1] += int(line.split(",")[6])
             dat_s[2] += int(line.split(",")[7])
             dat_s[3] += int(line.split(",")[8])
-#            dat_s[4] += int(line.split(",")[9])
-#            dat_s[5] += int(line.split(",")[10])
+            #dat_s[4] += int(line.split(",")[9])
+            #dat_s[5] += int(line.split(",")[10])
             dat_s[7] += float(line.split(",")[11])
-#            dat_s[7] += float(line.split(",")[12])
+            #dat_s[7] += float(line.split(",")[12])
 
             dat_s[8] += float(line.split(",")[13])
             dat_s[9] += float(line.split(",")[14])
@@ -72,7 +72,7 @@ for line in lines:
             dat_s[15] += float(line.split(",")[20])
         else:
             if(len(line.split(",")) < 21):
-		continue
+                continue
             linecount += 1
             dat_s[0] += int(line.split(",")[5])
             dat_s[1] += int(line.split(",")[6])
@@ -123,16 +123,16 @@ for line in lines:
             linecount += 0
         elif (line.find(",,,") != -1):
             if(len(line.split(",")) < 21):
-		continue
+                continue
             linecount += 1
             dat_s[0] += int(line.split(",")[5])
             dat_s[1] += int(line.split(",")[6])
             dat_s[2] += int(line.split(",")[7])
             dat_s[3] += int(line.split(",")[8])
-#            dat_s[4] += int(line.split(",")[9])
+            #dat_s[4] += int(line.split(",")[9])
             dat_s[7] += int(line.split(",")[10])   #throughput
-#            dat_s[6] += float(line.split(",")[11])
-#            dat_s[7] += float(line.split(",")[12])
+            #dat_s[6] += float(line.split(",")[11])
+            #dat_s[7] += float(line.split(",")[12])
 
             dat_s[8] += float(line.split(",")[13])
             dat_s[9] += float(line.split(",")[14])
@@ -151,10 +151,10 @@ for line in lines:
             dat_s[1] += int(line.split(",")[6])
             dat_s[2] += int(line.split(",")[7])
             dat_s[3] += int(line.split(",")[8])
-#            dat_s[4] += int(line.split(",")[9])
-#            dat_s[5] += int(line.split(",")[10])
+            #dat_s[4] += int(line.split(",")[9])
+            #dat_s[5] += int(line.split(",")[10])
             dat_s[7] += float(line.split(",")[11])
-#            dat_s[7] += float(line.split(",")[12])
+            #dat_s[7] += float(line.split(",")[12])
 
             dat_s[8] += float(line.split(",")[13])
             dat_s[9] += float(line.split(",")[14])
