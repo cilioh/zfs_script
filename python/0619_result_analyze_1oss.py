@@ -5,7 +5,7 @@ import sys
 foldername = sys.argv[1]
 filename = sys.argv[2]
 
-columns = ['nodename', 'bsize', 'numjobs','stripecount','95per','99per','99.9per','99.99per','min_iops','max_iops','avg_iops','throughput', \
+columns = ['nodename', 'filesize_per_thread xfersize blocksize', 'numjobs','stripecount','95per','99per','99.9per','99.99per','min_iops','max_iops','avg_iops','throughput', \
 'pm1_nvme0_io','pm1_nvme1_io','pm1_nvme2_io','pm1_nvme3_io', \
 'pm1_nvme0_write','pm1_nvme1_write','pm1_nvme2_write','pm1_nvme3_write']
 #'pm2_nvme0_io','pm2_nvme1_io','pm2_nvme2_io','pm2_nvme3_io', \
