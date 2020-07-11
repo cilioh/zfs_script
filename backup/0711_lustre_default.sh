@@ -13,7 +13,8 @@ mkdir -p /mnt/share/cykim/result/${todaydate}
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_${nodename}.txt
 
 
-for xfersize in "1M" "4M" "16M"
+for xfersize in "1M"
+#for xfersize in "1M" "4M" "16M"
 do
 
 	case $xfersize in
@@ -30,10 +31,11 @@ do
 			blsize3="64M"
 			blsize4="128M";;
 	esac
-	for blocksize in $blsize1 $blsize2 $blsize3 $blsize4
+	for blocksize in "1M"
+#	for blocksize in $blsize1 $blsize2 $blsize3 $blsize4
 	do
 
-		for bsize in "8G" "16G" "32G"
+		for bsize in "4G" "8G" "16G" "32G"
 		do
 
 		#	for numjobs in "4"
