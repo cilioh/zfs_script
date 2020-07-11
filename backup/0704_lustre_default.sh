@@ -16,22 +16,30 @@ echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_$
 for xfersize in "1M" "4M" "16M"
 do
 
-blsize="1M 2M 4M 8M"
 case $xfersize in
-	"1M") blsize="1M 2M 4M 8M";;
-	"4M") blsize="4M 8M 16M 32M";;
-	"16M") blsze="16M 32M 64M";;
+	"1M")   blsize1="1M"
+		blsize2="2M"
+		blsize3="4M"
+		blsize4="8M";;
+	"4M")   blsize1="4M"
+		blsize2="8M"
+		blsize3="16M"
+		blsize4="32M";;
+	"16M")  blsize1="16M"
+		blsize2="32M"
+		blsize3="64M"
+		blsize4="128M";;
 esac
-for blocksize in $blsize
+for blocksize in $blsize1 $blsize2 $blsize3 $blsize4
 do
 
-for bsize in "8G" "16G" "32G" "64G"
+for bsize in "8G" "16G" "32G"
 do
 #	for numjobs in "4"
-	for numjobs in "1" "2" "4" "8"
+	for numjobs in "1" "2" "4" "8" "16"
 	do
 #		for stripecount in "12"
-		for stripecount in "1" "4" "8" "16" "64"
+		for stripecount in "1" "4" "16"
 		do
 			lfs setstripe -C ${stripecount} /mnt/lustre
 			lfs setstripe -S ${xfersize} /mnt/lustre
@@ -52,7 +60,7 @@ do
 #				ssh pm2 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output2' &
 #				ssh pm3 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output3' &
 
-				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blsize} ${xfersize}
+				/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize}
 
 				/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} ${nodename}
 
