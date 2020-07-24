@@ -24,7 +24,7 @@ lines = f.readlines()
 for line in lines:
     if (line.find(",") == -1):
         continue
-    elif (line.split(",")[4] == "3"):  # Iteration : 3
+    elif (line.split(",")[4] == "1"):  # Iteration : 3
         if (line.find(",,,,") != -1):
             linecount += 0
         elif (line.find(",,,") != -1):

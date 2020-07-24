@@ -13,7 +13,7 @@ mkdir -p /mnt/share/cykim/result/${todaydate}
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_${nodename}.txt
 
 #OSS maximum IO size change
-#ssh pm3 'lctl set_param obdfilter.lustre-OST*.brw_size=16'
+ssh pm3 'lctl set_param obdfilter.lustre-OST*.brw_size=16'
 
 for osc_maxpages in "64" "128" "256" "512" "1024" "2048" "4096"
 do
@@ -65,7 +65,7 @@ do
 		#			lfs setstripe -o 1 /mnt/lustre
 
 #					for iter in {1..2}
-					for iter in {1..3}
+					for iter in 1
 					do
 						rm -rf /mnt/lustre/*
 						sleep 5
@@ -89,15 +89,16 @@ do
 							ssh pm1 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output1' &
 						fi
 						if [[ $experiment =~ "2" ]]; then
-							ssh pm2 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output1' &
+							ssh pm2 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output2' &
 						fi
 						if [[ $experiment =~ "3" ]]; then
-							ssh pm3 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output1' &
+							ssh pm3 'iostat -d nvme0n1 nvme1n1 nvme2n1 nvme3n1 -c 1 | grep nvme > /mnt/share/cykim/result/output3' &
 						fi
 
 						/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment} ${osc_maxpages} ${osc_maxflight}
 
 						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} ${nodename} ${experiment}
+
 
 						totval=`lfs df -h | awk '$1=="filesystem_summary:" { print $5 }' | grep -oP '\d+'`
 						if [ $totval -ge 98 ]; then
