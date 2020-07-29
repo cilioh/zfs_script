@@ -1,6 +1,6 @@
 #!/bin/bash
 
-directory="/nvme"
+directory="/mnt/nvme"
 sig_dir="/mnt/share/cykim/signal"
 nodename="PM1"
 filename="apple"
@@ -17,9 +17,9 @@ do
 	do
 		for bsize in "4G" "8G" "16G" "32G"
 		do
-			for numjobs in "1" "2" "4" "8"
+			for numjobs in "1" "2" "4" "8" "16"
 			do
-				for iter in {1..1}
+				for iter in {1..5}
 				do
 					rm -rf /mnt/nvme/*
 					sleep 5
@@ -31,7 +31,7 @@ do
 					/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} ${nodename} 4
 
 #					totval=`df -h | awk '$1=="/dev/nvme0n1" { print $5 }' | grep -oP '\d+'`
-					totval=`df -h | awk '$1=="nvme" { print $5 }' | grep -oP '\d+'`
+					totval=`df -h | awk '$1=="nvme/nvme0" { print $5 }' | grep -oP '\d+'`
 					if [ $totval -ge 98 ]; then
 						echo " Storage 98% FULL --- EMPTY "
 						rm -rf ${directory}/${filename}*
