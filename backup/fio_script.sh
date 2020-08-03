@@ -31,8 +31,8 @@ direct=0  #0: buffered , 1:directIO
 	iopsmax=`echo $output | cut -d',' -f6`
 	iopsavg=`echo $output | cut -d',' -f7`
 	th=`echo $output | cut -d',' -f8`
-	#echo "["${nodename}",BJ="${bsize}",BS="${blsize}",Xfer="${xfersize}",NJ="${numjobs}",SC="${stripecount}",IT-"${iternum}"],99%=["${per99}"],iops_avg=["${iopsavg}"],TH=["${th}"]"
-	echo "["${nodename}",BJ="${bsize}",Mpages="${13}",Mflight="${14}",NJ="${numjobs}",SC="${stripecount}",IT-"${iternum}"],99%=["${per99}"],iops_avg=["${iopsavg}"],TH=["${th}"]"
+	echo "["${nodename}",BJ="${bsize}",BS="${blsize}",Xfer="${xfersize}",NJ="${numjobs}",SC="${stripecount}",IT-"${iternum}"],99%=["${per99}"],iops_avg=["${iopsavg}"],TH=["${th}"]"
+#	echo "["${nodename}",BJ="${bsize}",Mpages="${13}",Mflight="${14}",NJ="${numjobs}",SC="${stripecount}",IT-"${iternum}"],99%=["${per99}"],iops_avg=["${iopsavg}"],TH=["${th}"]"
 	sleep 1
 
 	echo "ON" > /mnt/share/cykim/signal/${nodename}

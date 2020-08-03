@@ -22,27 +22,34 @@ fi
 ostnum=0
 if [[ ${1} == "oss" ]]; then
 
-        for oss in  "pm003"
+        for oss in "pm001" "pm002" "pm003"
         do
-                ssh $oss 'umount /lustre/ost'${ostnum}
-                ssh $oss 'zpool destroy ost'${ostnum}
+#                ssh $oss 'umount /lustre/ost'${ostnum}
+#                ssh $oss 'zpool destroy ost'${ostnum}
+#                ostnum=`expr $ostnum + 1`
+#		ssh $oss 'umount /lustre/ost'${ostnum}
+#                ssh $oss 'zpool destroy ost'${ostnum}
+               # ostnum=`expr $ostnum + 1`
+#		ssh $oss 'umount /lustre/ost'${ostnum}
+#                ssh $oss 'zpool destroy ost'${ostnum}
+#                ostnum=`expr $ostnum + 1`
+#                ostnum=`expr $ostnum + 1`
+#		ssh $oss 'zpool destroy ost'
+
+		ssh $oss 'umount /lustre/ost'${ostnum}
                 ostnum=`expr $ostnum + 1`
 		ssh $oss 'umount /lustre/ost'${ostnum}
-                ssh $oss 'zpool destroy ost'${ostnum}
                 ostnum=`expr $ostnum + 1`
 		ssh $oss 'umount /lustre/ost'${ostnum}
-                ssh $oss 'zpool destroy ost'${ostnum}
                 ostnum=`expr $ostnum + 1`
 		ssh $oss 'umount /lustre/ost'${ostnum}
-                ssh $oss 'zpool destroy ost'${ostnum}
                 ostnum=`expr $ostnum + 1`
-		ssh $oss 'zpool destroy ost'
 
                 ssh $oss 'modprobe -r lustre'
 		ssh $oss 'lctl network down'
                 ssh $oss 'lustre_rmmod'
-		ssh $oss 'systemctl kill zfs-zed'
-		ssh $oss 'modprobe -r zfs'
+#		ssh $oss 'systemctl kill zfs-zed'
+#		ssh $oss 'modprobe -r zfs'
                 ssh $oss 'modprobe -r lnet'
                 echo "${oss} - lustreFS DOWN"
         done
