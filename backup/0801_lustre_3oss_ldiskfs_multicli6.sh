@@ -14,13 +14,15 @@ echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_$
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN8.txt
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN9.txt
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN10.txt
+echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN11.txt
+echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN12.txt
 
 
 for xfersize in "1M"
 do
 	for blocksize in "1M"
 	do
-		for bsize in "4G" "8G" "16G" "32G"
+		for bsize in "4G" "8G" "16G"
 		do
 			for numjobs in "1" "2" "4" "8" "16"
 			do
@@ -30,6 +32,8 @@ do
 					ssh cn8 "lfs setstripe -C "${stripecount}" /mnt/lustre"
 					ssh cn9 "lfs setstripe -C "${stripecount}" /mnt/lustre"
 					ssh cn10 "lfs setstripe -C "${stripecount}" /mnt/lustre"
+					ssh cn11 "lfs setstripe -C "${stripecount}" /mnt/lustre"
+					ssh cn12 "lfs setstripe -C "${stripecount}" /mnt/lustre"
 
 					for iter in {1..5}
 					do
@@ -40,12 +44,16 @@ do
 						ssh cn8 'echo 3 > /proc/sys/vm/drop_caches'
 						ssh cn9 'echo 3 > /proc/sys/vm/drop_caches'
 						ssh cn10 'echo 3 > /proc/sys/vm/drop_caches'
+						ssh cn11 'echo 3 > /proc/sys/vm/drop_caches'
+						ssh cn12 'echo 3 > /proc/sys/vm/drop_caches'
 						sleep 1
 
 						echo "OFF" > ${sig_dir}/CN7
 						echo "OFF" > ${sig_dir}/CN8
 						echo "OFF" > ${sig_dir}/CN9
 						echo "OFF" > ${sig_dir}/CN10
+						echo "OFF" > ${sig_dir}/CN11
+						echo "OFF" > ${sig_dir}/CN12
 
 						if [[ $experiment =~ "1" ]]; then
 							ssh pm1 'echo 3 > /proc/sys/vm/drop_caches'
@@ -81,10 +89,19 @@ do
 						/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment} &
 						ssh cn8 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN8" "banana" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment} &
 						ssh cn9 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN9" "citrus" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment} &
-						ssh cn10 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN10" "dfruit" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment}
+						ssh cn10 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN10" "dfruit" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment} &
+						ssh cn11 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN11" "erep" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment} &
+						ssh cn12 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN12" "fungus" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment}
 
 						while true
 						do
+
+							msg=`cat ${sig_dir}/CN11`
+							if [[ $msg == "ON" ]]; then
+
+							msg=`cat ${sig_dir}/CN10`
+							if [[ $msg == "ON" ]]; then
+
 							msg=`cat ${sig_dir}/CN9`
 							if [[ $msg == "ON" ]]; then
 								msg2=`cat ${sig_dir}/CN8`
@@ -95,12 +112,16 @@ do
 									fi
 								fi
 							fi
+							fi
+							fi
 							sleep 1
 						done
 						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN7" ${experiment}
 						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN8" ${experiment}
 						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN9" ${experiment}
 						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN10" ${experiment}
+						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN11" ${experiment}
+						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN12" ${experiment}
 
 						totval=`lfs df -h | awk '$1=="filesystem_summary:" { print $5 }' | grep -oP '\d+'`
 						if [ $totval -ge 98 ]; then
