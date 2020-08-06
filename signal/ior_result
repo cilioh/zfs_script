@@ -1,20 +1,20 @@
 IOR-3.3.0+dev: MPI Coordinated Test of Parallel I/O
-Began               : Thu Aug  6 05:02:37 2020
-Command line        : ior -w -i=1 -t=1m -b=32G -o=/mnt/lustre/apple
+Began               : Thu Aug  6 13:02:45 2020
+Command line        : ior -w -i=1 -t=1m -F -z -b=32G -o=/mnt/lustre/apple
 Machine             : Linux cn7
 TestID              : 0
-StartTime           : Thu Aug  6 05:02:37 2020
+StartTime           : Thu Aug  6 13:02:45 2020
 Path                : /mnt/lustre
-FS                  : 1023.3 GiB   Used FS: 0.0%   Inodes: 15.3 Mi   Used Inodes: 0.0%
+FS                  : 1023.3 GiB   Used FS: 12.3%   Inodes: 15.3 Mi   Used Inodes: 0.0%
 
 Options: 
 api                 : POSIX
 apiVersion          : 
 test filename       : /mnt/lustre/apple
-access              : single-shared-file
+access              : file-per-process
 type                : independent
 segments            : 1
-ordering in a file  : sequential
+ordering in a file  : random
 ordering inter file : no tasks offsets
 nodes               : 1
 tasks               : 16
@@ -28,11 +28,11 @@ Results:
 
 access    bw(MiB/s)  IOPS       Latency(s)  block(KiB) xfer(KiB)  open(s)    wr/rd(s)   close(s)   total(s)   iter
 ------    ---------  ----       ----------  ---------- ---------  --------   --------   --------   --------   ----
-write     1586.23    1586.31    0.010075    33554432   1024.00    0.001441   330.51     3.41       330.53     0   
-remove    -          -          -           -          -          -          -          -          8.82       0   
-Max Write: 1586.23 MiB/sec (1663.28 MB/sec)
+write     4486       4486       0.003509    33554432   1024.00    0.014619   116.88     2.37       116.88     0   
+remove    -          -          -           -          -          -          -          -          3.07       0   
+Max Write: 4485.70 MiB/sec (4703.60 MB/sec)
 
 Summary of all tests:
 Operation   Max(MiB)   Min(MiB)  Mean(MiB)     StdDev   Max(OPs)   Min(OPs)  Mean(OPs)     StdDev    Mean(s) Stonewall(s) Stonewall(MiB) Test# #Tasks tPN reps fPP reord reordoff reordrand seed segcnt   blksiz    xsize aggs(MiB)   API RefNum
-write        1586.23    1586.23    1586.23       0.00    1586.23    1586.23    1586.23       0.00  330.52561         NA            NA     0     16  16    1   0     0        1         0    0      1 34359738368  1048576  524288.0 POSIX      0
-Finished            : Thu Aug  6 05:08:16 2020
+write        4485.70    4485.70    4485.70       0.00    4485.70    4485.70    4485.70       0.00  116.87990         NA            NA     0     16  16    1   1     0        1         0    0      1 34359738368  1048576  524288.0 POSIX      0
+Finished            : Thu Aug  6 13:04:45 2020
