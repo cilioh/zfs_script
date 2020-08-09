@@ -7,7 +7,7 @@ filename="apple"
 todaydate=`date "+%m%d"`
 todaytime=`date "+%H%M"`
 SECONDS=0
-experiment="4"
+experiment="1"
 
 mkdir -p /mnt/share/cykim/result/${todaydate}
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_${nodename}.txt

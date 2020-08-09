@@ -7,13 +7,13 @@ filename="apple"
 todaydate=`date "+%m%d"`
 todaytime=`date "+%H%M"`
 SECONDS=0
-experiment="3"
+experiment="1"
 
 mkdir -p /mnt/share/cykim/result/${todaydate}
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_${nodename}.txt
 
 #OSS maximum IO size change
-ssh pm3 'lctl set_param obdfilter.lustre-OST*.brw_size=16'
+ssh pm1 'lctl set_param obdfilter.lustre-OST*.brw_size=16'
 
 for osc_maxpages in "64" "128" "256" "512" "1024" "2048" "4096"
 do
@@ -65,7 +65,7 @@ do
 		#			lfs setstripe -o 1 /mnt/lustre
 
 #					for iter in {1..2}
-					for iter in {1..2}
+					for iter in {1..3}
 					do
 						rm -rf /mnt/lustre/*
 						sleep 5
