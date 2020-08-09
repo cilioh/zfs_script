@@ -51,7 +51,7 @@ do
 		#			lfs setstripe -o 1 /mnt/lustre
 
 #					for iter in {1..2}
-					for iter in {1..5}
+					for iter in {1..3}
 					do
 						rm -rf /mnt/lustre/*
 						sleep 5

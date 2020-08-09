@@ -4,6 +4,7 @@ import sys
 
 foldername = sys.argv[1]
 filename = sys.argv[2]
+iternum = sys.argv[3]
 
 columns = ['nodename', 'filesize_per_thread max_pages max_flight', 'numjobs','stripecount','95per','99per','99.9per','99.99per','min_iops','max_iops','avg_iops','throughput', \
 'pm1_nvme0_io','pm1_nvme1_io','pm1_nvme2_io','pm1_nvme3_io', \
@@ -24,7 +25,7 @@ lines = f.readlines()
 for line in lines:
     if (line.find(",") == -1):
         continue
-    elif (line.split(",")[4] == "5"):  # Iteration : 3
+    elif (line.split(",")[4] == iternum):  # Iteration : 3
         if (line.find(",,,,") != -1):
             linecount += 0
         elif (line.find(",,,") != -1):

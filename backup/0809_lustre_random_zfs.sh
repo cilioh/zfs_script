@@ -2,12 +2,12 @@
 
 directory="/mnt/lustre"
 sig_dir="/mnt/share/cykim/signal"
-nodename="CN7"
+nodename="CN8"
 filename="apple"
 todaydate=`date "+%m%d"`
 todaytime=`date "+%H%M"`
 SECONDS=0
-experiment="1"
+experiment="3"
 
 mkdir -p /mnt/share/cykim/result/${todaydate}
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_${nodename}.txt
@@ -19,13 +19,19 @@ do
 	do
 		for bsize in "4G" "8G" "16G" "32G"
 		do
-			for numjobs in "1" "2" "4" "8" "16"
+			for numjobs in "1" "2" "4" "8" "16" "32"
 			do
+				if [[ $bsize == "32G" ]]; then
+					if [[ $numjobs == "32" ]]; then
+						continue
+					fi
+				fi
+
 				for stripecount in "1" "2" "4" "8" "16"
 				do
 					lfs setstripe -C ${stripecount} /mnt/lustre
 
-					for iter in {1..5}
+					for iter in {1..2}
 					do
 						rm -rf /mnt/lustre/*
 						sleep 5
@@ -62,7 +68,7 @@ do
 							ssh pm4 'iostat -d nvme1n1 nvme2n1 nvme3n1 nvme4n1 -c 1 | grep nvme > /mnt/share/cykim/result/output4' &
 						fi
 
-						/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment}
+						/mnt/share/cykim/backup/fio_script_random.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment}
 
 						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} ${nodename} ${experiment}
 
