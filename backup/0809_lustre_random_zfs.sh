@@ -17,15 +17,19 @@ for xfersize in "1M"
 do
 	for blocksize in "1M"
 	do
-		for bsize in "4G" "8G" "16G" "32G"
+		for bsize in "32G"
+
+#		for bsize in "4G" "8G" "16G" "32G"
 		do
-			for numjobs in "1" "2" "4" "8" "16" "32"
+			for numjobs in "16"
+
+#			for numjobs in "1" "2" "4" "8" "16" "32"
 			do
-				if [[ $bsize == "32G" ]]; then
-					if [[ $numjobs == "32" ]]; then
-						continue
-					fi
-				fi
+#				if [[ $bsize == "32G" ]]; then
+#					if [[ $numjobs == "32" ]]; then
+#						continue
+#					fi
+#				fi
 
 				for stripecount in "1" "2" "4" "8" "16"
 				do

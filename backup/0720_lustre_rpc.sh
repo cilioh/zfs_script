@@ -15,7 +15,8 @@ echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_$
 #OSS maximum IO size change
 ssh pm1 'lctl set_param obdfilter.lustre-OST*.brw_size=16'
 
-for osc_maxpages in "64" "128" "256" "512" "1024" "2048" "4096"
+for osc_maxpages in "2048" "4096"
+#for osc_maxpages in "64" "128" "256" "512" "1024" "2048" "4096"
 do
 
 lctl set_param osc.lustre-OST*.max_pages_per_rpc=${osc_maxpages}
