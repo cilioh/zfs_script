@@ -26,8 +26,34 @@ for line in lines:
     if (line.find(",") == -1):
         continue
     elif (line.split(",")[4] == iternum):  # Iteration : 3
-        if (line.find(",,,,") != -1):
+        if (line.find(",,,,,,") != -1):
             linecount += 0
+        elif (line.find(",,,,,") != -1):
+            if(len(line.split(",")) < 21):
+                continue
+            linecount += 1
+            #dat_s[0] += int(line.split(",")[5])
+            #dat_s[1] += int(line.split(",")[6])
+            #dat_s[2] += int(line.split(",")[7])
+            dat_s[7] += int(line.split(",")[8])  #th
+            #dat_s[4] += int(line.split(",")[9])
+            #dat_s[5] += int(line.split(",")[10])
+            #dat_s[6] += float(line.split(",")[11])
+            #dat_s[7] += float(line.split(",")[12])
+
+        elif (line.find(",,,,") != -1):
+            if(len(line.split(",")) < 21):
+                continue
+            linecount += 1
+            #dat_s[0] += int(line.split(",")[5])
+            #dat_s[1] += int(line.split(",")[6])
+            #dat_s[2] += int(line.split(",")[7])
+            #dat_s[3] += int(line.split(",")[8])
+            dat_s[7] += int(line.split(",")[9])  #th
+            #dat_s[5] += int(line.split(",")[10])
+            #dat_s[6] += float(line.split(",")[11])
+            #dat_s[7] += float(line.split(",")[12])
+
         elif (line.find(",,,") != -1):
             if(len(line.split(",")) < 21):
                 continue
@@ -40,15 +66,6 @@ for line in lines:
             dat_s[7] += int(line.split(",")[10])   #throughput
             #dat_s[6] += float(line.split(",")[11])
             #dat_s[7] += float(line.split(",")[12])
-
-            dat_s[8] += float(line.split(",")[13])
-            dat_s[9] += float(line.split(",")[14])
-            dat_s[10] += float(line.split(",")[15])
-            dat_s[11] += float(line.split(",")[16])
-            dat_s[12] += float(line.split(",")[17])
-            dat_s[13] += float(line.split(",")[18])
-            dat_s[14] += float(line.split(",")[19])
-            dat_s[15] += float(line.split(",")[20])
 
         elif (line.find(",,") != -1):
             if(len(line.split(",")) < 21):
@@ -63,14 +80,6 @@ for line in lines:
             dat_s[7] += float(line.split(",")[11])
             #dat_s[7] += float(line.split(",")[12])
 
-            dat_s[8] += float(line.split(",")[13])
-            dat_s[9] += float(line.split(",")[14])
-            dat_s[10] += float(line.split(",")[15])
-            dat_s[11] += float(line.split(",")[16])
-            dat_s[12] += float(line.split(",")[17])
-            dat_s[13] += float(line.split(",")[18])
-            dat_s[14] += float(line.split(",")[19])
-            dat_s[15] += float(line.split(",")[20])
         else:
             if(len(line.split(",")) < 21):
                 continue
@@ -84,6 +93,7 @@ for line in lines:
             dat_s[6] += float(line.split(",")[11])
             dat_s[7] += float(line.split(",")[12])
 
+        if(len(line.split(",")) == 21):
             dat_s[8] += float(line.split(",")[13])
             dat_s[9] += float(line.split(",")[14])
             dat_s[10] += float(line.split(",")[15])
@@ -92,6 +102,7 @@ for line in lines:
             dat_s[13] += float(line.split(",")[18])
             dat_s[14] += float(line.split(",")[19])
             dat_s[15] += float(line.split(",")[20])
+
         #record data into pd
         temp_df = pd.DataFrame(data=[[line.split(",")[0],line.split(",")[1], \
                                      line.split(",")[2],line.split(",")[3], \
@@ -120,8 +131,34 @@ for line in lines:
         0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
         linecount = 0
     else:
-        if (line.find(",,,,") != -1):
+        if (line.find(",,,,,,") != -1):
             linecount += 0
+        elif (line.find(",,,,,") != -1):
+            if(len(line.split(",")) < 21):
+                continue
+            linecount += 1
+            #dat_s[0] += int(line.split(",")[5])
+            #dat_s[1] += int(line.split(",")[6])
+            #dat_s[2] += int(line.split(",")[7])
+            dat_s[7] += int(line.split(",")[8])  #th
+            #dat_s[4] += int(line.split(",")[9])
+            #dat_s[5] += int(line.split(",")[10])
+            #dat_s[6] += float(line.split(",")[11])
+            #dat_s[7] += float(line.split(",")[12])
+
+        elif (line.find(",,,,") != -1):
+            if(len(line.split(",")) < 21):
+                continue
+            linecount += 1
+            #dat_s[0] += int(line.split(",")[5])
+            #dat_s[1] += int(line.split(",")[6])
+            #dat_s[2] += int(line.split(",")[7])
+            #dat_s[3] += int(line.split(",")[8])
+            dat_s[7] += int(line.split(",")[9])  #th
+            #dat_s[5] += int(line.split(",")[10])
+            #dat_s[6] += float(line.split(",")[11])
+            #dat_s[7] += float(line.split(",")[12])
+
         elif (line.find(",,,") != -1):
             if(len(line.split(",")) < 21):
                 continue
@@ -135,18 +172,9 @@ for line in lines:
             #dat_s[6] += float(line.split(",")[11])
             #dat_s[7] += float(line.split(",")[12])
 
-            dat_s[8] += float(line.split(",")[13])
-            dat_s[9] += float(line.split(",")[14])
-            dat_s[10] += float(line.split(",")[15])
-            dat_s[11] += float(line.split(",")[16])
-            dat_s[12] += float(line.split(",")[17])
-            dat_s[13] += float(line.split(",")[18])
-            dat_s[14] += float(line.split(",")[19])
-            dat_s[15] += float(line.split(",")[20])
-
         elif (line.find(",,") != -1):
             if(len(line.split(",")) < 21):
-		continue
+                continue
             linecount += 1
             dat_s[0] += int(line.split(",")[5])
             dat_s[1] += int(line.split(",")[6])
@@ -157,17 +185,9 @@ for line in lines:
             dat_s[7] += float(line.split(",")[11])
             #dat_s[7] += float(line.split(",")[12])
 
-            dat_s[8] += float(line.split(",")[13])
-            dat_s[9] += float(line.split(",")[14])
-            dat_s[10] += float(line.split(",")[15])
-            dat_s[11] += float(line.split(",")[16])
-            dat_s[12] += float(line.split(",")[17])
-            dat_s[13] += float(line.split(",")[18])
-            dat_s[14] += float(line.split(",")[19])
-            dat_s[15] += float(line.split(",")[20])
         else:
             if(len(line.split(",")) < 21):
-		continue
+                continue
             linecount += 1
             dat_s[0] += int(line.split(",")[5])
             dat_s[1] += int(line.split(",")[6])
@@ -177,7 +197,8 @@ for line in lines:
             dat_s[5] += int(line.split(",")[10])
             dat_s[6] += float(line.split(",")[11])
             dat_s[7] += float(line.split(",")[12])
- 
+
+        if(len(line.split(",")) == 21):
             dat_s[8] += float(line.split(",")[13])
             dat_s[9] += float(line.split(",")[14])
             dat_s[10] += float(line.split(",")[15])
