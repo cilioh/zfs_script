@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mdsname="pm2"
+mdsname="mds2"
 
 echo "mdt / oss1 / cn"
 
@@ -38,9 +38,9 @@ if [[ $1 == "oss1" ]]; then
 	sleep 2
 	mkfs.lustre --ost --backfstype=ldiskfs --index=4 --reformat --mgsnode=${mdsname}i@o2ib --fsname=lustre /dev/nvme3n1
 	sleep 2
-fi
+#fi
 
-if [[ $1 == "oss1m" ]]; then
+#if [[ $1 == "oss1m" ]]; then
 
 	mount -t lustre /dev/nvme0n1 /lustre/ost0
 	mount -t lustre /dev/nvme1n1 /lustre/ost1

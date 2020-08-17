@@ -23,7 +23,13 @@ lnetctl net add --net o2ib --if ib0
 sleep 2
 
 if [[ $1 == "mdt" ]]; then
-	mkfs.lustre --mdt --mgs --fsname=lustre --backfstype=zfs --reformat --index=0 mdt/mdt0 /dev/sdc
+
+	if [[ $mdsname == "mds2" ]]; then
+		mkfs.lustre --mdt --mgs --fsname=lustre --backfstype=zfs --reformat --index=0 mdt/mdt0 /dev/sdc
+	else
+		mkfs.lustre --mdt --mgs --fsname=lustre --backfstype=zfs --reformat --index=0 mdt/mdt0 /dev/nvme0n1
+	fi
+
 	sleep 5
 
 	mkdir -p /lustre/mdt
@@ -41,9 +47,9 @@ if [[ $1 == "oss1" ]]; then
 	sleep 2
 	mkfs.lustre --ost --backfstype=zfs --index=4 --reformat --mgsnode=${mdsname}i@o2ib --fsname=lustre ost3/ost3 /dev/nvme3n1
 	sleep 2
-fi
+#fi
 
-if [[ $1 == "oss1m" ]]; then
+#if [[ $1 == "oss1m" ]]; then
 
 	mount -t lustre ost0/ost0 /lustre/ost0
 	mount -t lustre ost1/ost1 /lustre/ost1
