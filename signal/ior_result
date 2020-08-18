@@ -1,11 +1,11 @@
 IOR-3.3.0+dev: MPI Coordinated Test of Parallel I/O
-Began               : Sat Aug 15 19:14:19 2020
+Began               : Tue Aug 18 12:54:40 2020
 Command line        : ior -w -i=1 -t=256M -b=256M -o=/mnt/lustre/apple
 Machine             : Linux cn7
 TestID              : 0
-StartTime           : Sat Aug 15 19:14:19 2020
+StartTime           : Tue Aug 18 12:54:40 2020
 Path                : /mnt/lustre
-FS                  : 1023.3 GiB   Used FS: 0.0%   Inodes: 15.3 Mi   Used Inodes: 0.0%
+FS                  : 255.8 GiB   Used FS: 0.0%   Inodes: 3.8 Mi   Used Inodes: 0.0%
 
 Options: 
 api                 : POSIX
@@ -28,11 +28,11 @@ Results:
 
 access    bw(MiB/s)  IOPS       Latency(s)  block(KiB) xfer(KiB)  open(s)    wr/rd(s)   close(s)   total(s)   iter
 ------    ---------  ----       ----------  ---------- ---------  --------   --------   --------   --------   ----
-write     1946.82    7.60       8.18        262144     262144     0.063176   8.42       8.20       8.42       0   
-remove    -          -          -           -          -          -          -          -          6.54       0   
-Max Write: 1946.82 MiB/sec (2041.39 MB/sec)
+write     1981.39    7.74       7.00        262144     262144     0.052870   8.27       8.06       8.27       0   
+remove    -          -          -           -          -          -          -          -          6.98       0   
+Max Write: 1981.39 MiB/sec (2077.64 MB/sec)
 
 Summary of all tests:
 Operation   Max(MiB)   Min(MiB)  Mean(MiB)     StdDev   Max(OPs)   Min(OPs)  Mean(OPs)     StdDev    Mean(s) Stonewall(s) Stonewall(MiB) Test# #Tasks tPN reps fPP reord reordoff reordrand seed segcnt   blksiz    xsize aggs(MiB)   API RefNum
-write        1946.82    1946.82    1946.82       0.00       7.60       7.60       7.60       0.00    8.41576         NA            NA     0     64  64    1   0     0        1         0    0      1 268435456 268435456   16384.0 POSIX      0
-Finished            : Sat Aug 15 19:14:35 2020
+write        1981.39    1981.39    1981.39       0.00       7.74       7.74       7.74       0.00    8.26895         NA            NA     0     64  64    1   0     0        1         0    0      1 268435456 268435456   16384.0 POSIX      0
+Finished            : Tue Aug 18 12:54:57 2020
