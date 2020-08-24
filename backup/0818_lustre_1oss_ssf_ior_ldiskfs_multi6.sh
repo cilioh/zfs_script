@@ -28,6 +28,9 @@ do
 			do
 				for stripecount in "1" "2" "4" "8" "16" "32" "64"
 				do
+					rm -rf /mnt/lustre/*
+					sleep 10
+
 					lfs setstripe -C ${stripecount} /mnt/lustre
 					lfs setstripe -S ${xfersize} /mnt/lustre
 
@@ -44,7 +47,8 @@ do
 
 						echo 3 > /proc/sys/vm/drop_caches
 						echo "OFF" > ${sig_dir}/CN7
-						for nodes in "CN8" "CN9" "CN10" "CN11" "CN12" do
+						for nodes in "CN8" "CN9" "CN10" "CN11" "CN12"
+						do
 							ssh $nodes 'echo 3 > /proc/sys/vm/drop_caches'
 							echo "OFF" > ${sig_dir}/${nodes}
 							sleep 1

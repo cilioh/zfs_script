@@ -28,6 +28,9 @@ do
 			do
 				for stripecount in "1" "2" "4" "8" "16" "32" "64"
 				do
+					rm -rf /mnt/lustre/*
+					sleep 10
+
 					lfs setstripe -C ${stripecount} /mnt/lustre
 					lfs setstripe -S ${xfersize} /mnt/lustre
 
@@ -44,7 +47,8 @@ do
 
 						echo 3 > /proc/sys/vm/drop_caches
 						echo "OFF" > ${sig_dir}/CN7
-						for nodes in "CN8" "CN9" "CN10" "CN11" "CN12" do
+						for nodes in "CN8" "CN9" "CN10" "CN11" "CN12"
+						do
 							ssh $nodes 'echo 3 > /proc/sys/vm/drop_caches'
 							echo "OFF" > ${sig_dir}/${nodes}
 							sleep 1
@@ -81,12 +85,12 @@ do
 							ssh pm4 'iostat -d nvme1n1 nvme2n1 nvme3n1 nvme4n1 -c 1 | grep nvme > /mnt/share/cykim/result/output4' &
 						fi
 
-						/mnt/share/cykim/backup/ior_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
-						ssh cn8 "/mnt/share/cykim/backup/ior_script.sh" ${bsize} ${numjobs} "CN8" "banana" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
-						ssh cn9 "/mnt/share/cykim/backup/ior_script.sh" ${bsize} ${numjobs} "CN9" "citrus" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
-						ssh cn10 "/mnt/share/cykim/backup/ior_script.sh" ${bsize} ${numjobs} "CN10" "dragon" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
-						ssh cn11 "/mnt/share/cykim/backup/ior_script.sh" ${bsize} ${numjobs} "CN11" "elepht" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
-						ssh cn12 "/mnt/share/cykim/backup/ior_script.sh" ${bsize} ${numjobs} "CN12" "fungus" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory}
+						/mnt/share/cykim/backup/ior_script_direct.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
+						ssh cn8 "/mnt/share/cykim/backup/ior_script_direct.sh" ${bsize} ${numjobs} "CN8" "banana" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
+						ssh cn9 "/mnt/share/cykim/backup/ior_script_direct.sh" ${bsize} ${numjobs} "CN9" "citrus" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
+						ssh cn10 "/mnt/share/cykim/backup/ior_script_direct.sh" ${bsize} ${numjobs} "CN10" "dragon" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
+						ssh cn11 "/mnt/share/cykim/backup/ior_script_direct.sh" ${bsize} ${numjobs} "CN11" "elepht" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
+						ssh cn12 "/mnt/share/cykim/backup/ior_script_direct.sh" ${bsize} ${numjobs} "CN12" "fungus" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory}
 						while true
 						do
 							msg=`cat ${sig_dir}/CN11`

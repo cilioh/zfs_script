@@ -12,7 +12,7 @@ directory=${9}
 
 sig_dir="/mnt/share/cykim/signal"
 
-mpirun -np ${numjobs} ior -w -i=1 -t=${bsize} -b=${bsize} -o=${directory}/${filename} > ${sig_dir}/ior_result${nodename}
+mpirun -np ${numjobs} ior -w -i=1 -t=${bsize} -useO_DIRECT -b=${bsize} -o=${directory}/${filename} > ${sig_dir}/ior_result${nodename}
 
 throughput=`cat ${sig_dir}/ior_result${nodename} | awk '$1=="write" { print }' | head -1 | awk ' { print $2 }'`
 iops=`cat ${sig_dir}/ior_result${nodename} | awk '$1=="write" { print }' | head -1 | awk ' { print $3 }'`
