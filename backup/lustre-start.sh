@@ -54,6 +54,15 @@ if [[ $1 == "oss1" ]]; then
 	df -h
 fi
 
+if [[ $1 == "oss11" ]]; then
+
+	mkfs.lustre --ost --backfstype=ldiskfs --index=1 --reformat --mgsnode=${mdsname}i@o2ib --fsname=lustre /dev/nvme0n1
+	sleep 2
+
+	mount -t lustre /dev/nvme0n1 /lustre/ost0
+	mount -t lustre /dev/nvme0n1 /lustre/ost0
+	df -h
+fi
 if [[ $1 == "oss2" ]]; then
 
 	mkfs.lustre --ost --backfstype=ldiskfs --index=5 --reformat --mgsnode=pm4i@o2ib --fsname=lustre /dev/nvme0n1

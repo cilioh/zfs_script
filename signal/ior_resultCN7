@@ -1,9 +1,9 @@
 IOR-3.3.0+dev: MPI Coordinated Test of Parallel I/O
-Began               : Mon Aug 24 10:07:36 2020
-Command line        : ior -w -i=1 -t=128M -useO_DIRECT -b=128M -o=/mnt/lustre/apple
+Began               : Thu Aug 27 16:06:26 2020
+Command line        : ior -w -i=1 -t=256M -useO_DIRECT -b=256M -o=/mnt/lustre/apple
 Machine             : Linux cn7
 TestID              : 0
-StartTime           : Mon Aug 24 10:07:36 2020
+StartTime           : Thu Aug 27 16:06:26 2020
 Path                : /mnt/lustre
 FS                  : 255.8 GiB   Used FS: 0.0%   Inodes: 3.8 Mi   Used Inodes: 0.0%
 
@@ -17,17 +17,22 @@ segments            : 1
 ordering in a file  : sequential
 ordering inter file : no tasks offsets
 nodes               : 1
-tasks               : 64
-clients per node    : 64
+tasks               : 16
+clients per node    : 16
 repetitions         : 1
-xfersize            : 128 MiB
-blocksize           : 128 MiB
-aggregate filesize  : 8 GiB
+xfersize            : 256 MiB
+blocksize           : 256 MiB
+aggregate filesize  : 4 GiB
 
 Results: 
 
 access    bw(MiB/s)  IOPS       Latency(s)  block(KiB) xfer(KiB)  open(s)    wr/rd(s)   close(s)   total(s)   iter
 ------    ---------  ----       ----------  ---------- ---------  --------   --------   --------   --------   ----
-[mpiexec@cn7] Sending Ctrl-C to processes as requested
-[mpiexec@cn7] Press Ctrl-C again to force abort
-Ctrl-C caught... cleaning up processes
+write     1824.59    7.13       2.05        262144     262144     0.001058   2.24       2.04       2.24       0   
+remove    -          -          -           -          -          -          -          -          1.07       0   
+Max Write: 1824.59 MiB/sec (1913.22 MB/sec)
+
+Summary of all tests:
+Operation   Max(MiB)   Min(MiB)  Mean(MiB)     StdDev   Max(OPs)   Min(OPs)  Mean(OPs)     StdDev    Mean(s) Stonewall(s) Stonewall(MiB) Test# #Tasks tPN reps fPP reord reordoff reordrand seed segcnt   blksiz    xsize aggs(MiB)   API RefNum
+write        1824.59    1824.59    1824.59       0.00       7.13       7.13       7.13       0.00    2.24489         NA            NA     0     16  16    1   0     0        1         0    0      1 268435456 268435456    4096.0 POSIX      0
+Finished            : Thu Aug 27 16:06:30 2020
