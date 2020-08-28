@@ -1,38 +1,38 @@
 IOR-3.3.0+dev: MPI Coordinated Test of Parallel I/O
-Began               : Fri Aug 28 07:01:31 2020
-Command line        : ior -w -i=1 -t=256M -useO_DIRECT -b=256M -o=/mnt/lustre/banana
-Machine             : Linux cn8
+Began               : Fri Aug 28 00:07:44 2020
+Command line        : ior -w -i=1 -t=1G -useO_DIRECT -b=1G -o=/mnt/lustre/apple
+Machine             : Linux pm1
 TestID              : 0
-StartTime           : Fri Aug 28 07:01:31 2020
+StartTime           : Fri Aug 28 00:07:44 2020
 Path                : /mnt/lustre
 FS                  : 255.8 GiB   Used FS: 0.0%   Inodes: 3.8 Mi   Used Inodes: 0.0%
 
 Options: 
 api                 : POSIX
 apiVersion          : 
-test filename       : /mnt/lustre/banana
+test filename       : /mnt/lustre/apple
 access              : single-shared-file
 type                : independent
 segments            : 1
 ordering in a file  : sequential
 ordering inter file : no tasks offsets
 nodes               : 1
-tasks               : 64
-clients per node    : 64
+tasks               : 8
+clients per node    : 8
 repetitions         : 1
-xfersize            : 256 MiB
-blocksize           : 256 MiB
-aggregate filesize  : 16 GiB
+xfersize            : 1 GiB
+blocksize           : 1 GiB
+aggregate filesize  : 8 GiB
 
 Results: 
 
 access    bw(MiB/s)  IOPS       Latency(s)  block(KiB) xfer(KiB)  open(s)    wr/rd(s)   close(s)   total(s)   iter
 ------    ---------  ----       ----------  ---------- ---------  --------   --------   --------   --------   ----
-write     1228.08    4.80       0.174221    262144     262144     0.060009   13.33      13.11      13.34      0   
-remove    -          -          -           -          -          -          -          -          6.28       0   
-Max Write: 1228.08 MiB/sec (1287.73 MB/sec)
+write     1885.44    1.84       0.772622    1048576    1048576    0.001763   4.34       3.57       4.34       0   
+remove    -          -          -           -          -          -          -          -          1.80       0   
+Max Write: 1885.44 MiB/sec (1977.03 MB/sec)
 
 Summary of all tests:
 Operation   Max(MiB)   Min(MiB)  Mean(MiB)     StdDev   Max(OPs)   Min(OPs)  Mean(OPs)     StdDev    Mean(s) Stonewall(s) Stonewall(MiB) Test# #Tasks tPN reps fPP reord reordoff reordrand seed segcnt   blksiz    xsize aggs(MiB)   API RefNum
-write        1228.08    1228.08    1228.08       0.00       4.80       4.80       4.80       0.00   13.34118         NA            NA     0     64  64    1   0     0        1         0    0      1 268435456 268435456   16384.0 POSIX      0
-Finished            : Fri Aug 28 07:01:52 2020
+write        1885.44    1885.44    1885.44       0.00       1.84       1.84       1.84       0.00    4.34487         NA            NA     0      8   8    1   0     0        1         0    0      1 1073741824 1073741824    8192.0 POSIX      0
+Finished            : Fri Aug 28 00:07:51 2020
