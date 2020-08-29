@@ -1,9 +1,9 @@
 IOR-3.3.0+dev: MPI Coordinated Test of Parallel I/O
-Began               : Sat Aug 29 03:46:11 2020
-Command line        : ior -w -i=1 -t=256M -useO_DIRECT -b=256M -o=/mnt/lustre/dragon
+Began               : Sat Aug 29 16:54:09 2020
+Command line        : ior -w -i=1 -t=8M -useO_DIRECT -b=8M -o=/mnt/lustre/dragon
 Machine             : Linux cn10
 TestID              : 0
-StartTime           : Sat Aug 29 03:46:11 2020
+StartTime           : Sat Aug 29 16:54:09 2020
 Path                : /mnt/lustre
 FS                  : 255.8 GiB   Used FS: 0.0%   Inodes: 3.8 Mi   Used Inodes: 0.0%
 
@@ -17,22 +17,22 @@ segments            : 1
 ordering in a file  : sequential
 ordering inter file : no tasks offsets
 nodes               : 1
-tasks               : 64
-clients per node    : 64
+tasks               : 32
+clients per node    : 32
 repetitions         : 1
-xfersize            : 256 MiB
-blocksize           : 256 MiB
-aggregate filesize  : 16 GiB
+xfersize            : 8 MiB
+blocksize           : 8 MiB
+aggregate filesize  : 256 MiB
 
 Results: 
 
 access    bw(MiB/s)  IOPS       Latency(s)  block(KiB) xfer(KiB)  open(s)    wr/rd(s)   close(s)   total(s)   iter
 ------    ---------  ----       ----------  ---------- ---------  --------   --------   --------   --------   ----
-write     640.07     2.50       0.505387    262144     262144     0.056797   25.58      25.08      25.60      0   
-remove    -          -          -           -          -          -          -          -          10.22      0   
-Max Write: 640.07 MiB/sec (671.16 MB/sec)
+write     879.93     110.00     0.072163    8192       8192       0.044879   0.290896   0.227092   0.290933   0   
+remove    -          -          -           -          -          -          -          -          0.048482   0   
+Max Write: 879.93 MiB/sec (922.67 MB/sec)
 
 Summary of all tests:
 Operation   Max(MiB)   Min(MiB)  Mean(MiB)     StdDev   Max(OPs)   Min(OPs)  Mean(OPs)     StdDev    Mean(s) Stonewall(s) Stonewall(MiB) Test# #Tasks tPN reps fPP reord reordoff reordrand seed segcnt   blksiz    xsize aggs(MiB)   API RefNum
-write         640.07     640.07     640.07       0.00       2.50       2.50       2.50       0.00   25.59738         NA            NA     0     64  64    1   0     0        1         0    0      1 268435456 268435456   16384.0 POSIX      0
-Finished            : Sat Aug 29 03:46:47 2020
+write         879.93     879.93     879.93       0.00     109.99     109.99     109.99       0.00    0.29093         NA            NA     0     32  32    1   0     0        1         0    0      1  8388608  8388608     256.0 POSIX      0
+Finished            : Sat Aug 29 16:54:10 2020
