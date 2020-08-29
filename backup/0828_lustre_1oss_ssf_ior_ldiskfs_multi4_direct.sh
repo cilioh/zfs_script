@@ -24,9 +24,9 @@ do
 	do
 		for bsize in $xfersize
 		do
-			for numjobs in "1" "2" "4" "8" "16"  #"32" "64"
+			for numjobs in "32" "64"  #"1" "2" "4" "8" "16"  #"32" "64"
 			do
-				for stripecount in "1" "2" "4" "8" "16" #"32" "64"
+				for stripecount in "32" "64"  #"1" "2" "4" "8" "16" #"32" "64"
 				do
 					rm -rf /mnt/lustre/*
 					sleep 10
