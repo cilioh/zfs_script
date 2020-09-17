@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mdsname="mds2"
+mdsname="mds2e"
 
 echo "mdt / oss1 / cn"
 
@@ -30,13 +30,13 @@ fi
 
 if [[ $1 == "oss1" ]]; then
 
-	mkfs.lustre --ost --backfstype=ldiskfs --index=1 --reformat --mgsnode=${mdsname}i@o2ib --fsname=lustre /dev/nvme0n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=1 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme0n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=ldiskfs --index=2 --reformat --mgsnode=${mdsname}i@o2ib --fsname=lustre /dev/nvme1n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=2 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme1n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=ldiskfs --index=3 --reformat --mgsnode=${mdsname}i@o2ib --fsname=lustre /dev/nvme2n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=3 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme2n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=ldiskfs --index=4 --reformat --mgsnode=${mdsname}i@o2ib --fsname=lustre /dev/nvme3n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=4 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme3n1
 	sleep 2
 #fi
 
@@ -56,7 +56,7 @@ fi
 
 if [[ $1 == "oss11" ]]; then
 
-	mkfs.lustre --ost --backfstype=ldiskfs --index=1 --reformat --mgsnode=${mdsname}i@o2ib --fsname=lustre /dev/nvme0n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=1 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme0n1
 	sleep 2
 
 	mount -t lustre /dev/nvme0n1 /lustre/ost0
@@ -116,7 +116,7 @@ fi
 
 if [[ $1 == "cn" ]]; then
 
-	mount -t lustre ${mdsname}i@o2ib:/lustre /mnt/lustre
+	mount -t lustre ${mdsname}@o2ib:/lustre /mnt/lustre
 	sleep 3
 	chmod 777 /mnt/lustre
 	sleep 2
