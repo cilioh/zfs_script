@@ -24,17 +24,19 @@ do
 		do
 			for numjobs in "1" "2" "4" "8" "16"
 			do
-				for stripecount in "1" "2" "4" "8" "12" "24"
+				for stripecount in "1" "4" "16"
 				do
-					lfs setstripe -C ${stripecount} /mnt/lustre
-					ssh cn8 "lfs setstripe -C "${stripecount}" /mnt/lustre"
-					ssh cn9 "lfs setstripe -C "${stripecount}" /mnt/lustre"
-					ssh cn10 "lfs setstripe -C "${stripecount}" /mnt/lustre"
+					echo "print"
+					#lfs setstripe -C ${stripecount} /mnt/lustre
+					#ssh cn8 "lfs setstripe -C "${stripecount}" /mnt/lustre"
+					#ssh cn9 "lfs setstripe -C "${stripecount}" /mnt/lustre"
+					#ssh cn10 "lfs setstripe -C "${stripecount}" /mnt/lustre"
 
 					for iter in {1..5}
 					do
 						rm -rf /mnt/lustre/*
 						sleep 4
+						echo $iter
 
 						echo 3 > /proc/sys/vm/drop_caches
 						ssh cn8 'echo 3 > /proc/sys/vm/drop_caches'

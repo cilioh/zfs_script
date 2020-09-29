@@ -27,7 +27,6 @@ if [[ $1 == "mdt" ]]; then
 	mount -t lustre /dev/nvme0n1 /lustre/mdt
 	df -h
 fi
-
 if [[ $1 == "oss1" ]]; then
 
 	mkfs.lustre --ost --backfstype=ldiskfs --index=1 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme0n1
@@ -38,9 +37,6 @@ if [[ $1 == "oss1" ]]; then
 	sleep 2
 	mkfs.lustre --ost --backfstype=ldiskfs --index=4 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme3n1
 	sleep 2
-#fi
-
-#if [[ $1 == "oss1m" ]]; then
 
 	mount -t lustre /dev/nvme0n1 /lustre/ost0
 	mount -t lustre /dev/nvme1n1 /lustre/ost1
@@ -53,7 +49,6 @@ if [[ $1 == "oss1" ]]; then
 	mount -t lustre /dev/nvme3n1 /lustre/ost3
 	df -h
 fi
-
 if [[ $1 == "oss11" ]]; then
 
 	mkfs.lustre --ost --backfstype=ldiskfs --index=1 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme0n1
@@ -65,55 +60,66 @@ if [[ $1 == "oss11" ]]; then
 fi
 if [[ $1 == "oss2" ]]; then
 
-	mkfs.lustre --ost --backfstype=ldiskfs --index=5 --reformat --mgsnode=pm4i@o2ib --fsname=lustre /dev/nvme0n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=5 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme0n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=ldiskfs --index=6 --reformat --mgsnode=pm4i@o2ib --fsname=lustre /dev/nvme1n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=6 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme1n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=ldiskfs --index=7 --reformat --mgsnode=pm4i@o2ib --fsname=lustre /dev/nvme2n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=7 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme2n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=ldiskfs --index=8 --reformat --mgsnode=pm4i@o2ib --fsname=lustre /dev/nvme3n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=8 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme3n1
 	sleep 2
-fi
 
-if [[ $1 == "oss2m" ]]; then
+	mount -t lustre /dev/nvme0n1 /lustre/ost0
+	mount -t lustre /dev/nvme1n1 /lustre/ost1
+	mount -t lustre /dev/nvme2n1 /lustre/ost2
+	mount -t lustre /dev/nvme3n1 /lustre/ost3
 
-	mount -t lustre /dev/nvme0n1 /lustre/ost4
-	mount -t lustre /dev/nvme1n1 /lustre/ost5
-	mount -t lustre /dev/nvme2n1 /lustre/ost6
-	mount -t lustre /dev/nvme3n1 /lustre/ost7
-
-	mount -t lustre /dev/nvme0n1 /lustre/ost4
-	mount -t lustre /dev/nvme1n1 /lustre/ost5
-	mount -t lustre /dev/nvme2n1 /lustre/ost6
-	mount -t lustre /dev/nvme3n1 /lustre/ost7
+	mount -t lustre /dev/nvme0n1 /lustre/ost0
+	mount -t lustre /dev/nvme1n1 /lustre/ost1
+	mount -t lustre /dev/nvme2n1 /lustre/ost2
+	mount -t lustre /dev/nvme3n1 /lustre/ost3
 	df -h
 fi
+if [[ $1 == "oss21" ]]; then
 
+	mkfs.lustre --ost --backfstype=ldiskfs --index=1 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme0n1
+	sleep 2
+
+	mount -t lustre /dev/nvme0n1 /lustre/ost0
+	mount -t lustre /dev/nvme0n1 /lustre/ost0
+	df -h
+fi
 if [[ $1 == "oss3" ]]; then
 
-	mkfs.lustre --ost --backfstype=ldiskfs --index=9 --reformat --mgsnode=pm4i@o2ib --fsname=lustre /dev/nvme0n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=9 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme0n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=ldiskfs --index=10 --reformat --mgsnode=pm4i@o2ib --fsname=lustre /dev/nvme1n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=10 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme1n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=ldiskfs --index=11 --reformat --mgsnode=pm4i@o2ib --fsname=lustre /dev/nvme2n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=11 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme2n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=ldiskfs --index=12 --reformat --mgsnode=pm4i@o2ib --fsname=lustre /dev/nvme3n1
+	mkfs.lustre --ost --backfstype=ldiskfs --index=12 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme3n1
 	sleep 2
-fi
 
-if [[ $1 == "oss3m" ]]; then
-	mount -t lustre /dev/nvme0n1 /lustre/ost8
-	mount -t lustre /dev/nvme1n1 /lustre/ost9
-	mount -t lustre /dev/nvme2n1 /lustre/ost10
-	mount -t lustre /dev/nvme3n1 /lustre/ost11
+	mount -t lustre /dev/nvme0n1 /lustre/ost9
+	mount -t lustre /dev/nvme1n1 /lustre/ost10
+	mount -t lustre /dev/nvme2n1 /lustre/ost11
+	mount -t lustre /dev/nvme3n1 /lustre/ost12
 
-	mount -t lustre /dev/nvme0n1 /lustre/ost8
-	mount -t lustre /dev/nvme1n1 /lustre/ost9
-	mount -t lustre /dev/nvme2n1 /lustre/ost10
-	mount -t lustre /dev/nvme3n1 /lustre/ost11
+	mount -t lustre /dev/nvme0n1 /lustre/ost9
+	mount -t lustre /dev/nvme1n1 /lustre/ost10
+	mount -t lustre /dev/nvme2n1 /lustre/ost11
+	mount -t lustre /dev/nvme3n1 /lustre/ost12
 	df -h
 fi
+if [[ $1 == "oss31" ]]; then
 
+	mkfs.lustre --ost --backfstype=ldiskfs --index=1 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre /dev/nvme0n1
+	sleep 2
+
+	mount -t lustre /dev/nvme0n1 /lustre/ost0
+	mount -t lustre /dev/nvme0n1 /lustre/ost0
+	df -h
+fi
 if [[ $1 == "cn" ]]; then
 
 	mount -t lustre ${mdsname}@o2ib:/lustre /mnt/lustre
