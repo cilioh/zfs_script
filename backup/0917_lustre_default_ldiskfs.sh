@@ -23,11 +23,11 @@ do
 			for numjobs in "1" "2" "4" "8" "16"
 			do
 
-				for stripecount in "4"
+				for stripecount in "1" "4" "16"
 				do
 					lfs setstripe -C ${stripecount} /mnt/lustre
 
-					for iter in {1..1}
+					for iter in {1..5}
 					do
 						rm -rf /mnt/lustre/*
 						sleep 5

@@ -37,6 +37,17 @@ if [[ $1 == "mdt" ]]; then
 	df -h
 fi
 
+if [[ $1 == "md0" ]]; then
+
+
+	mkfs.lustre --ost --backfstype=zfs --index=1 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost0/ost0 /dev/md0
+	sleep 2
+
+	mount -t lustre ost0/ost0 /lustre/ost0
+	mount -t lustre ost0/ost0 /lustre/ost0
+	df -h
+fi
+
 if [[ $1 == "oss1" ]]; then
 
 	mkfs.lustre --ost --backfstype=zfs --index=1 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost0/ost0 /dev/nvme0n1
