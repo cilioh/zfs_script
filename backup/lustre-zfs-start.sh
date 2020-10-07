@@ -7,10 +7,14 @@ echo "mdt / oss1 / cn"
 modprobe lustre
 sleep 2
 
-if [[ $1 != "cn" ]]; then
+if [[ $1 =~ "oss" ]]; then
 
 	/mnt/share/cykim/backup/zfs_start_insmod.sh
 	#modprobe zfs
+	sleep 2
+elif [[ $1 == "mdt" ]]; then
+
+	modprobe zfs
 	sleep 2
 fi
 
