@@ -19,46 +19,37 @@ if [[ ${1} == "cn" ]]; then
 	echo "client - FS Down"
 fi
 
-ostnum=0
-if [[ ${1} == "oss" ]]; then
+if [[ ${1} =~ "oss" ]]; then
 
-#        for oss in "pm3" #"pm001" "pm002" "pm003"
-#        do
-#                ssh $oss 'umount /lustre/ost'${ostnum}
-#                ssh $oss 'zpool destroy ost'${ostnum}
-#                ostnum=`expr $ostnum + 1`
-#		ssh $oss 'umount /lustre/ost'${ostnum}
-#                ssh $oss 'zpool destroy ost'${ostnum}
-               # ostnum=`expr $ostnum + 1`
-#		ssh $oss 'umount /lustre/ost'${ostnum}
-#                ssh $oss 'zpool destroy ost'${ostnum}
-#                ostnum=`expr $ostnum + 1`
-#                ostnum=`expr $ostnum + 1`
-#		ssh $oss 'zpool destroy ost'
+	if [[ ${1} == "oss1" ]]; then
 
-		umount /lustre/ost${ostnum}
-                ostnum=`expr $ostnum + 1`
-		umount /lustre/ost${ostnum}
-                ostnum=`expr $ostnum + 1`
-		umount /lustre/ost${ostnum}
-                ostnum=`expr $ostnum + 1`
-		umount /lustre/ost${ostnum}
-                ostnum=`expr $ostnum + 1`
-#		ssh $oss 'umount /lustre/ost'${ostnum}
-#                ostnum=`expr $ostnum + 1`
-#		ssh $oss 'umount /lustre/ost'${ostnum}
-#                ostnum=`expr $ostnum + 1`
-#		ssh $oss 'umount /lustre/ost'${ostnum}
- #               ostnum=`expr $ostnum + 1`
+		for ostnum in {1..4}; do
+			umount /lustre/ost${ostnum}
+			zpool destroy ost${ostnum}
+		done
+	fi
+	if [[ ${1} == "oss2" ]]; then
 
-                modprobe -r lustre
-		lctl network down
-                lustre_rmmod
-		systemctl kill zfs-zed
-		modprobe -r zfs
-                modprobe -r lnet
-                echo "${oss} - lustreFS DOWN"
-#        done
+		for ostnum in {5..8}; do
+			umount /lustre/ost${ostnum}
+			zpool destroy ost${ostnum}
+		done
+	fi
+	if [[ ${1} == "oss3" ]]; then
+
+		for ostnum in {9..12}; do
+			umount /lustre/ost${ostnum}
+			zpool destroy ost${ostnum}
+		done
+	fi
+
+        modprobe -r lustre
+	lctl network down
+        lustre_rmmod
+	systemctl kill zfs-zed
+	modprobe -r zfs
+        modprobe -r lnet
+        echo "${oss} - lustreFS DOWN"
 fi
 
 if [[ ${1} == "mdt" ]]; then
@@ -72,14 +63,5 @@ if [[ ${1} == "mdt" ]]; then
 	modprobe -r zfs
 	modprobe -r lnet
 
-#	mdtip="192.168.0.204"
-#	ssh $mdtip 'umount /lustre/mdt'
-#	ssh 192.168.0.204 'zpool destroy mdt'
-#	ssh 192.168.0.204 'modprobe -r lustre'
-#	ssh 192.168.0.204 'lctl network down'
-#	ssh 192.168.0.204 'lustre_rmmod'
-#	ssh 192.168.0.204 'systemctl kill zfs-zed'
-#	ssh 192.168.0.204 'modprobe -r zfs'
-#	ssh 192.168.0.204 'modprobe -r lnet'
 	echo "MDT - lustreFS DOWN"
 fi
