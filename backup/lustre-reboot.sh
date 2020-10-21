@@ -2,21 +2,22 @@
 
 if [[ ${1} == "cn" ]]; then
 
-#        for cli in "cn7" "cn8" "cn9" "cn10"
-#        do
-#                ssh $cli 'umount /mnt/lustre'
-#                ssh $cli 'modprobe -r lustre'
-#                ssh $cli 'lctl network down'
-#                ssh $cli 'lustre_rmmod'
-#                ssh $cli 'modprobe -r lnet'
-#                echo "${cli} - lustreFS DOWN"
-#        done
-	umount /mnt/lustre
-	modprobe -r lustre
-	lctl network down
-	lustre_rmmod
-	modprobe -r lnet
-	echo "client - FS Down"
+        for cli in "cn7" "cn8" "cn9" "cn10"
+        do
+                ssh $cli 'umount /mnt/lustre'
+                ssh $cli 'modprobe -r lustre'
+                ssh $cli 'lctl network down'
+                ssh $cli 'lustre_rmmod'
+                ssh $cli 'modprobe -r lnet'
+                echo "${cli} - lustreFS DOWN"
+        done
+
+#	umount /mnt/lustre
+#	modprobe -r lustre
+#	lctl network down
+#	lustre_rmmod
+#	modprobe -r lnet
+#	echo "client - FS Down"
 fi
 
 if [[ ${1} =~ "oss" ]]; then

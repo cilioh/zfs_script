@@ -21,6 +21,6 @@ insmod /lib/modules/3.10.0-1062.1.1.el7_myms.x86_64/extra/zfs/avl/zavl.ko
 insmod /lib/modules/3.10.0-1062.1.1.el7_myms.x86_64/extra/zfs/unicode/zunicode.ko 
 #insmod /lib/modules/3.10.0-1062.1.1.el7_myms.x86_64/extra/zfs/zfs/zfs.ko zvol_threads=1 zfs_vdev_aggregation_limit=1048576 zfs_vdev_async_write_active_min_dirty_percent=20 zfs_vdev_async_write_min_active=5 zfs_vdev_async_write_max_active=10 zfs_vdev_sync_read_min_active=16 zfs_vdev_sync_read_max_active=16
 
-insmod /lib/modules/3.10.0-1062.1.1.el7_myms.x86_64/extra/zfs/zfs/zfs.ko zio_taskq_batch_pct=10  #1 5 10 20 50
+insmod /lib/modules/3.10.0-1062.1.1.el7_myms.x86_64/extra/zfs/zfs/zfs.ko zio_taskq_batch_pct=20  #1 5 10 20 50
 #insmod /lib/modules/3.10.0-1062.1.1.el7_myms.x86_64/extra/zfs/zfs/zfs.ko
 
