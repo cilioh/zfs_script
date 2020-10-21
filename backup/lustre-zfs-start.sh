@@ -4,7 +4,13 @@ mdsname="mds2e"
 
 echo "mdt / oss1 / cn"
 
+if [[ $1 == "cn" ]]; then
+
+	/mnt/share/cykim/backup/ptlrpcd_start_insmod.sh
+fi
+
 modprobe lustre
+
 sleep 2
 
 if [[ $1 =~ "oss" ]]; then

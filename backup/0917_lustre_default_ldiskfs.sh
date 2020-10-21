@@ -7,7 +7,7 @@ filename="apple"
 todaydate=`date "+%m%d"`
 todaytime=`date "+%H%M"`
 SECONDS=0
-experiment="1"
+experiment="123"
 
 mkdir -p /mnt/share/cykim/result/${todaydate}
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_${nodename}.txt
@@ -17,17 +17,17 @@ do
 	for blocksize in "1M"
 	do
 #		for bsize in "8G"
-		for bsize in "4G" "8G" "16G" "32G"
+		for bsize in "32G"
 		do
-#			for numjobs in "4"
-			for numjobs in "1" "2" "4" "8" "16"
+			#for numjobs in "16"
+			for numjobs in "1" "2" "4" "8" "16" "32"
 			do
 
-				for stripecount in "1" "4" "16"
+				for stripecount in "12"
 				do
 					lfs setstripe -C ${stripecount} /mnt/lustre
 
-					for iter in {1..5}
+					for iter in {1..1}
 					do
 						rm -rf /mnt/lustre/*
 						sleep 5

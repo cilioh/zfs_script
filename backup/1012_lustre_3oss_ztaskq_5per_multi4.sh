@@ -23,7 +23,7 @@ do
 		do
 			for numjobs in "1" "2" "4" "8" "16"
 			do
-				for stripecount in "12" "24" "48"
+				for stripecount in "12"
 				do
 					rm -rf /mnt/lustre/*
 					sleep 10
@@ -35,7 +35,7 @@ do
 						ssh $nodes "lfs setstripe -C "${stripecount}" /mnt/lustre"
 					done
 
-					for iter in {1..5}
+					for iter in {1..5}  #iteration
 					do
 						rm -rf /mnt/lustre/*
 						sleep 5
@@ -84,18 +84,8 @@ do
 						ssh cn8 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN8" "banana" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment} &
 						ssh cn9 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN9" "citrus" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment} &
 						ssh cn10 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN10" "dragon" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} ${blocksize} ${xfersize} ${experiment}
-						#/mnt/share/cykim/backup/fio_script.sh ${bsize} ${numjobs} ${nodename} ${filename} ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
-						#ssh cn8 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN8" "banana" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
-						#ssh cn9 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN9" "citrus" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
-						#ssh cn10 "/mnt/share/cykim/backup/fio_script.sh" ${bsize} ${numjobs} "CN10" "dragon" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory}
-#						ssh cn11 "/mnt/share/cykim/backup/ior_script_direct.sh" ${bsize} ${numjobs} "CN11" "elepht" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory} &
-#						ssh cn12 "/mnt/share/cykim/backup/ior_script_direct.sh" ${bsize} ${numjobs} "CN12" "fungus" ${stripecount} ${todaydate} ${todaytime} ${iter} ${directory}
 						while true
 						do
-#							msg=`cat ${sig_dir}/CN11`
-#							if [[ $msg == "ON" ]]; then
-#							msg=`cat ${sig_dir}/CN10`
-#							if [[ $msg == "ON" ]]; then
 							msg=`cat ${sig_dir}/CN9`
 							if [[ $msg == "ON" ]]; then
 							msg=`cat ${sig_dir}/CN8`
@@ -106,8 +96,6 @@ do
 							fi
 							fi
 							fi
-#							fi
-#							fi
 							sleep 1
 						done
 
@@ -115,8 +103,6 @@ do
 						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN8" ${experiment}
 						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN9" ${experiment}
 						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN10" ${experiment}
-#						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN11" ${experiment}
-#						/mnt/share/cykim/backup/result_iostat_save.sh ${todaydate} ${todaytime} "CN12" ${experiment}
 
 						totval=`lfs df -h | awk '$1=="filesystem_summary:" { print $5 }' | grep -oP '\d+'`
 						if [ $totval -ge 98 ]; then

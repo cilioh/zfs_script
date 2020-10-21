@@ -23,7 +23,7 @@ if [[ ${1} =~ "oss" ]]; then
 
 	if [[ ${1} == "oss1" ]]; then
 
-		for ostnum in {1..4}; do
+		for ostnum in {0..3}; do
 			umount /lustre/ost${ostnum}
 			zpool destroy ost${ostnum}
 		done
