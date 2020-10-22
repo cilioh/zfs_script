@@ -19,7 +19,7 @@ for xfersize in "1M"
 do
 	for blocksize in "1M"
 	do
-		for bsize in "4G" "8G" "16G" "32G"
+		for bsize in "32G"
 		do
 			for numjobs in "1" "2" "4" "8" "16"
 			do
