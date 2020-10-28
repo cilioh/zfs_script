@@ -15,8 +15,8 @@ sleep 2
 
 if [[ $1 =~ "oss" ]]; then
 
-	#/mnt/share/cykim/backup/zfs_start_insmod.sh
-	modprobe zfs
+	/mnt/share/cykim/backup/zfs_start_insmod.sh
+	#modprobe zfs
 	sleep 2
 elif [[ $1 == "mdt" ]]; then
 
