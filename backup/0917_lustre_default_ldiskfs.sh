@@ -20,7 +20,7 @@ do
 		for bsize in "32G"
 		do
 			#for numjobs in "16"
-			for numjobs in "1" "2" "4" "8" "16" "32"
+			for numjobs in "1" "2" "4" "8" "16"
 			do
 
 				for stripecount in "12"

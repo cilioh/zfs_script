@@ -15,6 +15,7 @@ echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_$
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN9.txt
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_CN10.txt
 
+# parameter change here!
 for xfersize in "1M"
 do
 	for blocksize in "1M"
@@ -35,7 +36,7 @@ do
 						ssh $nodes "lfs setstripe -C "${stripecount}" /mnt/lustre"
 					done
 
-					for iter in {1..5}  #iteration
+					for iter in {1..3}  #iteration
 					do
 						rm -rf /mnt/lustre/*
 						sleep 5

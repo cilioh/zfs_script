@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mdsname="pm2e"
+mdsname="mds2e"
 
 echo "mdt / oss1 / cn"
 

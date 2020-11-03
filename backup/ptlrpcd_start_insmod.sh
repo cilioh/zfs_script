@@ -14,7 +14,10 @@
 
 modprobe obdclass
 
-insmod /lib/modules/3.10.0-1062.1.1.el7.local.x86_64/extra/lustre-client/fs/ptlrpc.ko ptlrpcd_per_cpt_max=16 ptlrpcd_bind_policy=1 ptlrpcd_partner_group_size=-1
+insmod /lib/modules/3.10.0-1062.1.1.el7.local.x86_64/extra/lustre-client/fs/ptlrpc.ko 
+
+
+#insmod /lib/modules/3.10.0-1062.1.1.el7.local.x86_64/extra/lustre-client/fs/ptlrpc.ko ptlrpcd_per_cpt_max=16 ptlrpcd_bind_policy=1 ptlrpcd_partner_group_size=-1
 
 
 #insmod /lib/modules/3.10.0-1062.1.1.el7.local.x86_64/extra/lustre-client/fs/fld.ko 
