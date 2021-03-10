@@ -5,15 +5,15 @@
 #ssh mds2 "sh /mnt/share/cykim/backup/lustre-reboot.sh mdt"
 sleep 20
 
-ssh mds2 "sh /mnt/share/cykim/backup/lustre-zfs-start.sh mdt"
-#ssh pm1 "sh /mnt/share/cykim/backup/lustre-zfs-start.sh oss1 $1 $2 $3 $4 $5"
-ssh pm1 "sh /mnt/share/cykim/backup/lustre-zfs-start.sh oss1"
-sh /mnt/share/cykim/backup/lustre-zfs-start.sh cn
+ssh mds2 "sh /mnt/share/cykim/backup/lustre-start.sh mdt"
+#ssh pm1 "sh /mnt/share/cykim/backup/lustre-start.sh oss1 $1 $2 $3 $4 $5"
+ssh pm1 "sh /mnt/share/cykim/backup/lustre-start.sh oss1"
+sh /mnt/share/cykim/backup/lustre-start.sh cn
 
-ssh pm1 "zfs set checksum=off ost0"
-ssh pm1 "zfs set checksum=off ost1"
-ssh pm1 "zfs set checksum=off ost2"
-ssh pm1 "zfs set checksum=off ost3"
+#ssh pm1 "zfs set checksum=off ost0"
+#ssh pm1 "zfs set checksum=off ost1"
+#ssh pm1 "zfs set checksum=off ost2"
+#ssh pm1 "zfs set checksum=off ost3"
 
 fio --directory=/mnt/lustre --name=check -rw=write --direct=0 --bs=1M --size=16G --numjobs=8 --group_reporting --fallocate=none
 

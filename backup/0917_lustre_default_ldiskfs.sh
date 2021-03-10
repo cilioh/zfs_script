@@ -2,12 +2,12 @@
 
 directory="/mnt/lustre"
 sig_dir="/mnt/share/cykim/signal"
-nodename="CN7"
+nodename="CN8"
 filename="apple"
 todaydate=`date "+%m%d"`
 todaytime=`date "+%H%M"`
 SECONDS=0
-experiment="123"
+experiment="1"
 
 mkdir -p /mnt/share/cykim/result/${todaydate}
 echo ${todaydate}"-"${todaytime} > /mnt/share/cykim/result/${todaydate}/Result_${todaytime}_${nodename}.txt
@@ -16,18 +16,17 @@ for xfersize in "1M"
 do
 	for blocksize in "1M"
 	do
-#		for bsize in "8G"
-		for bsize in "32G"
+#		for bsize in "4G" "8G" "16G" "32G"
+		for bsize in "16G"
 		do
-			#for numjobs in "16"
-			for numjobs in "1" "2" "4" "8" "16"
+			for numjobs in "8"
+#			for numjobs in "1" "2" "4" "8" "16"
 			do
-
-				for stripecount in "12"
+				for stripecount in "4"
 				do
 					lfs setstripe -C ${stripecount} /mnt/lustre
 
-					for iter in {1..1}
+					for iter in {1..3}
 					do
 						rm -rf /mnt/lustre/*
 						sleep 5

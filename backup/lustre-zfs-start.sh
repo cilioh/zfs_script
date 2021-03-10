@@ -15,6 +15,7 @@ sleep 2
 
 if [[ $1 =~ "oss" ]]; then
 
+	#/mnt/share/cykim/backup/zfs_start_insmod.sh $2 $3 $4 $5 $6
 	/mnt/share/cykim/backup/zfs_start_insmod.sh
 	#modprobe zfs
 	sleep 2
@@ -73,38 +74,44 @@ if [[ $1 == "oss1" ]]; then
 	mkfs.lustre --ost --backfstype=zfs --index=4 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost3/ost3 /dev/nvme3n1
 	sleep 2
 
-	mount -t lustre ost0/ost0 /lustre/ost0
-	mount -t lustre ost1/ost1 /lustre/ost1
-	mount -t lustre ost2/ost2 /lustre/ost2
-	mount -t lustre ost3/ost3 /lustre/ost3
+#mkfs.lustre --ost --backfstype=zfs --index=1 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost4/ost4 nvme0n1 nvme1n1 nvme2n1 nvme3n1
+#mkfs.lustre --ost --backfstype=zfs --index=1 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost4/ost4 md0
+#sleep 2
 
 	mount -t lustre ost0/ost0 /lustre/ost0
 	mount -t lustre ost1/ost1 /lustre/ost1
 	mount -t lustre ost2/ost2 /lustre/ost2
 	mount -t lustre ost3/ost3 /lustre/ost3
+#mount -t lustre ost4/ost4 /lustre/ost4
+
+	mount -t lustre ost0/ost0 /lustre/ost0
+	mount -t lustre ost1/ost1 /lustre/ost1
+	mount -t lustre ost2/ost2 /lustre/ost2
+	mount -t lustre ost3/ost3 /lustre/ost3
+#mount -t lustre ost4/ost4 /lustre/ost4
 	df -h
 fi
 
 if [[ $1 == "oss2" ]]; then
 
-	mkfs.lustre --ost --backfstype=zfs --index=5 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost5/ost5 /dev/nvme0n1
+	mkfs.lustre --ost --backfstype=zfs --index=5 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost5/ost5 mirror /dev/nvme0n1 /dev/nvme1n1 /dev/nvme2n1 /dev/nvme3n1
 	sleep 2
-	mkfs.lustre --ost --backfstype=zfs --index=6 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost6/ost6 /dev/nvme1n1
-	sleep 2
-	mkfs.lustre --ost --backfstype=zfs --index=7 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost7/ost7 /dev/nvme2n1
-	sleep 2
-	mkfs.lustre --ost --backfstype=zfs --index=8 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost8/ost8 /dev/nvme3n1
-	sleep 2
+	#mkfs.lustre --ost --backfstype=zfs --index=6 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost6/ost6 /dev/nvme1n1
+	#sleep 2
+	#mkfs.lustre --ost --backfstype=zfs --index=7 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost7/ost7 /dev/nvme2n1
+	#sleep 2
+	#mkfs.lustre --ost --backfstype=zfs --index=8 --reformat --mgsnode=${mdsname}@o2ib --fsname=lustre ost8/ost8 /dev/nvme3n1
+	#sleep 2
 
 	mount -t lustre ost5/ost5 /lustre/ost5
-	mount -t lustre ost6/ost6 /lustre/ost6
-	mount -t lustre ost7/ost7 /lustre/ost7
-	mount -t lustre ost8/ost8 /lustre/ost8
+	#mount -t lustre ost6/ost6 /lustre/ost6
+	#mount -t lustre ost7/ost7 /lustre/ost7
+	#mount -t lustre ost8/ost8 /lustre/ost8
 
 	mount -t lustre ost5/ost5 /lustre/ost5
-	mount -t lustre ost6/ost6 /lustre/ost6
-	mount -t lustre ost7/ost7 /lustre/ost7
-	mount -t lustre ost8/ost8 /lustre/ost8
+	#mount -t lustre ost6/ost6 /lustre/ost6
+	#mount -t lustre ost7/ost7 /lustre/ost7
+	#mount -t lustre ost8/ost8 /lustre/ost8
 	df -h
 fi
 

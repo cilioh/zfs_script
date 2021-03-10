@@ -2,7 +2,8 @@
 
 if [[ ${1} == "cn" ]]; then
 
-        for cli in "cn7" "cn8" "cn9" "cn10"
+#        for cli in "cn7" "cn8" "cn9" "cn10"
+	for cli in "cn8"
         do
                 ssh $cli 'umount /mnt/lustre'
                 ssh $cli 'modprobe -r lustre'
@@ -24,7 +25,7 @@ if [[ ${1} =~ "oss" ]]; then
 
 	if [[ ${1} == "oss1" ]]; then
 
-		for ostnum in {0..3}; do
+		for ostnum in {0..4}; do
 			umount /lustre/ost${ostnum}
 			zpool destroy ost${ostnum}
 		done
